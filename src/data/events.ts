@@ -144,8 +144,38 @@ export const events: FodiumEvent[] = [
     featured: false,
     seatsLeft: 60,
   },
+  {
+    id: 'evt-dakar-jazz-passe',
+    slug: 'dakar-jazz-festival',
+    title: 'Dakar Jazz Festival',
+    tagline: 'Édition 2026',
+    category: 'concert',
+    startsAt: '2026-05-18T19:00:00+00:00',
+    venue: 'Institut français',
+    city: 'Dakar',
+    description:
+      "L'édition 2026 du Dakar Jazz Festival s'est tenue sur trois soirées à l'Institut français.",
+    tags: ['Jazz', 'Archive'],
+    basePrice: 12000,
+    poster: null,
+    organizer: { name: 'Institut français de Dakar', verified: true, eventCount: 31 },
+    shuttle: null,
+    featured: false,
+    seatsLeft: 0,
+  },
 ]
 
 export function findEventBySlug(slug: string): FodiumEvent | undefined {
   return events.find((event) => event.slug === slug)
+}
+
+export function isUpcoming(event: FodiumEvent, now = new Date()): boolean {
+  return new Date(event.startsAt) >= now
+}
+
+/** Catalogue affichable, du plus proche au plus lointain. */
+export function upcomingEvents(now = new Date()): FodiumEvent[] {
+  return events
+    .filter((event) => isUpcoming(event, now))
+    .sort((a, b) => a.startsAt.localeCompare(b.startsAt))
 }

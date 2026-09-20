@@ -7,14 +7,13 @@ import { SearchBar } from '@/components/features/SearchBar'
 import { ShortcutTiles } from '@/components/features/ShortcutTiles'
 import { MobileHeader } from '@/components/layout/MobileHeader'
 import { PageContainer } from '@/components/layout/PageContainer'
-import { events } from '@/data/events'
+import { upcomingEvents } from '@/data/events'
 
-const featured = events.filter((event) => event.featured)
+const catalogue = upcomingEvents()
+const featured = catalogue.filter((event) => event.featured)
 
 /** Les vedettes tiennent déjà le carrousel : la frise prend la suite du calendrier. */
-const upcoming = events
-  .filter((event) => !event.featured)
-  .sort((a, b) => a.startsAt.localeCompare(b.startsAt))
+const upcoming = catalogue.filter((event) => !event.featured)
 
 export function Home() {
   return (

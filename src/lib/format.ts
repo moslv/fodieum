@@ -48,6 +48,17 @@ export function formatEventTime(iso: string): string {
   return timeFormatter.format(new Date(iso))
 }
 
+const shortDateFormatter = new Intl.DateTimeFormat(LOCALE, {
+  day: '2-digit',
+  month: 'short',
+  timeZone: TIME_ZONE,
+})
+
+/** `« 10 oct. »` — pour les cartes étroites, où l'année déborde. */
+export function formatShortDate(iso: string): string {
+  return shortDateFormatter.format(new Date(iso))
+}
+
 export interface DateBadgeParts {
   weekday: string
   day: string

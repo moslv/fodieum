@@ -1,5 +1,5 @@
 import { ArrowLeft, Check, ChevronDown, QrCode } from 'lucide-react'
-import { useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { HoldToPay } from '@/components/features/HoldToPay'
@@ -16,6 +16,7 @@ import { cn } from '@/lib/cn'
 import { formatPrice } from '@/lib/format'
 import { computePrice } from '@/lib/pricing'
 import { ticketReference } from '@/lib/ticket'
+import { issueTicket } from '@/lib/ticketStore'
 
 /** Durée d'appui : assez long pour être délibéré, assez court pour ne pas lasser. */
 const HOLD_DURATION = 1500
@@ -65,7 +66,20 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
     `${event.slug}:${selection.kind}:${selection.pickupPointId}:${selection.quantity}`,
   )
 
-  const hold = useHoldProgress({ duration: HOLD_DURATION, onComplete: () => undefined })
+  const issue = useCallback(() => {
+    issueTicket({
+      reference,
+      eventSlug: event.slug,
+      kind: selection.kind,
+      pickupPointId: selection.pickupPointId,
+      quantity: selection.quantity,
+      total: breakdown.total,
+      methodId,
+      issuedAt: new Date().toISOString(),
+    })
+  }, [breakdown.total, event.slug, methodId, reference, selection])
+
+  const hold = useHoldProgress({ duration: HOLD_DURATION, onComplete: issue })
   useTicketPrinting(ticketRef, hold.progress)
 
   const method = paymentMethods.find((item) => item.id === methodId) ?? paymentMethods[0]!
@@ -94,6 +108,7 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
           reference={reference}
           holder={account.fullName}
           quantity={selection.quantity}
+          printing
           rootRef={ticketRef}
           className="lg:sticky lg:top-[92px]"
         />

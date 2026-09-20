@@ -13,6 +13,8 @@ interface TicketStubProps {
   reference: string
   holder: string
   quantity: number
+  /** `true` pendant le paiement : le billet part vierge et s'imprime. */
+  printing?: boolean
   /** Le composant expose sa racine pour que la frise d'impression la cible. */
   rootRef?: RefObject<HTMLElement | null>
   className?: string
@@ -29,6 +31,7 @@ export function TicketStub({
   reference,
   holder,
   quantity,
+  printing = false,
   rootRef,
   className,
 }: TicketStubProps) {
@@ -74,13 +77,15 @@ export function TicketStub({
 
       {/* Tant que rien n'est imprimé, le corps du billet est vide : ce repère
           dit que c'est un blanc en attente, pas un affichage cassé. */}
-      <span
-        data-print="waiting"
-        className="pointer-events-none absolute inset-x-0 bottom-0 top-[58%] z-10 flex flex-col items-center justify-center gap-2 text-center"
-      >
-        <Fingerprint aria-hidden className="h-7 w-7 animate-pulse text-outline-variant" />
-        <span className="text-label-md text-outline">Billet en attente d'émission</span>
-      </span>
+      {printing ? (
+        <span
+          data-print="waiting"
+          className="pointer-events-none absolute inset-x-0 bottom-0 top-[58%] z-10 flex flex-col items-center justify-center gap-2 text-center"
+        >
+          <Fingerprint aria-hidden className="h-7 w-7 animate-pulse text-outline-variant" />
+          <span className="text-label-md text-outline">Billet en attente d'émission</span>
+        </span>
+      ) : null}
 
       <dl className="grid grid-cols-2 gap-x-4 gap-y-3.5 p-5">
         <TicketField label="Date" value={formatEventDate(event.startsAt)} />

@@ -8,6 +8,7 @@ import { Home } from '@/pages/Home'
 import { MyTickets } from '@/pages/MyTickets'
 import { NotFound } from '@/pages/NotFound'
 import { Profile } from '@/pages/Profile'
+import { TicketDetail } from '@/pages/TicketDetail'
 import { TransportTeaser } from '@/pages/TransportTeaser'
 
 /**
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
       { path: '/evenements/:slug/paiement', element: <Checkout /> },
       { path: '/transport', element: <TransportTeaser /> },
       { path: '/mes-billets', element: <MyTickets /> },
+      { path: '/mes-billets/:reference', element: <TicketDetail /> },
       { path: '/profil', element: <Profile /> },
       { path: '*', element: <NotFound /> },
     ],
