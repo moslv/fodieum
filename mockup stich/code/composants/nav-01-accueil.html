@@ -1,0 +1,32 @@
+<!-- NAV - source 01-accueil.html -->
+<!-- Extrait brut des maquettes Stitch. Tokens requis : voir ../tokens/tailwind.config.js -->
+<nav class="pointer-events-auto mx-auto max-w-[420px] h-[66px] rounded-full backdrop-blur-xl bg-white/85 border border-white/75 shadow-[0_16px_36px_-6px_rgba(20,20,20,0.12),0_6px_16px_-3px_rgba(20,20,20,0.05)] px-2 flex items-center justify-between" data-active-classes="text-primary font-bold bg-primary/10 rounded-full">
+<!-- Accueil (Active) -->
+<a aria-current="page" class="flex-1 min-w-0 h-12 flex flex-col items-center justify-center gap-1 transition-all text-primary font-bold bg-primary/10 rounded-full" data-path="accueil" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+<span class="font-label-sm text-[10px] leading-tight truncate px-1 font-bold">Accueil</span>
+</a>
+<!-- Événements -->
+<a class="flex-1 min-w-0 h-12 flex flex-col items-center justify-center gap-1 text-secondary hover:text-on-surface transition-colors" data-path="evenements" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"></path><path d="M13 5v2"></path><path d="M13 17v2"></path><path d="M13 11v2"></path></svg>
+<span class="font-label-sm text-[10px] leading-tight truncate px-1">Événements</span>
+</a>
+<!-- Transport -->
+<a class="relative flex-1 min-w-0 h-12 flex flex-col items-center justify-center gap-1 text-secondary hover:text-on-surface transition-colors" data-path="transport" href="#">
+<div class="relative flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M8 6v6"></path><path d="M15 6v6"></path><path d="M2 12h19.6"></path><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.6-.2-1.1-.5-1.5L18 8H5L2 12.5c-.3.4-.5.9-.5 1.5 0 .4.1.8.2 1.2.3 1.1.8 2.8.8 2.8h3"></path><circle cx="7" cy="18" r="2"></circle><circle cx="16" cy="18" r="2"></circle></svg>
+<span class="absolute -top-1.5 -right-5 bg-primary text-white font-label-sm text-[8px] leading-none px-1.5 py-0.5 rounded-full font-bold uppercase tracking-wider shadow-sm">Bientôt</span>
+</div>
+<span class="font-label-sm text-[10px] leading-tight truncate px-1">Transport</span>
+</a>
+<!-- Mes billets -->
+<a class="flex-1 min-w-0 h-12 flex flex-col items-center justify-center gap-1 text-secondary hover:text-on-surface transition-colors" data-path="mes-billets" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><rect height="5" width="5" x="3" y="3"></rect><rect height="5" width="5" x="16" y="3"></rect><rect height="5" width="5" x="3" y="16"></rect><path d="M21 16h-3a2 2 0 0 0-2 2v3"></path><path d="M21 21v.01"></path><path d="M12 7v3a2 2 0 0 1-2 2H7"></path><path d="M3 12h.01"></path><path d="M12 3h.01"></path><path d="M12 16v.01"></path><path d="M16 12h1"></path><path d="M21 12v.01"></path><path d="M12 21v-1"></path></svg>
+<span class="font-label-sm text-[10px] leading-tight truncate px-1">Mes billets</span>
+</a>
+<!-- Profil -->
+<a class="flex-1 min-w-0 h-12 flex flex-col items-center justify-center gap-1 text-secondary hover:text-on-surface transition-colors" data-path="profil" href="#">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+<span class="font-label-sm text-[10px] leading-tight truncate px-1">Profil</span>
+</a>
+</nav>

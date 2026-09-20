@@ -1,0 +1,608 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<style>
+@layer base {
+  html, body {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #fcf9f8;
+  }
+  body {
+    overscroll-behavior: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Authentic Concert Ticket Geometric Styles inspired by Quantum Zone */
+.ticket-h-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -8px rgba(28, 27, 27, 0.16), 0 2px 8px -2px rgba(240, 126, 0, 0.08);
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+.ticket-h-card:active {
+  transform: scale(0.985);
+}
+
+/* Semi-circular notch cutouts at top and bottom of vertical perforation line */
+.ticket-notch-top {
+  position: absolute;
+  top: -11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background-color: #fcf9f8;
+  z-index: 30;
+  box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.08);
+}
+.ticket-notch-bottom {
+  position: absolute;
+  bottom: -11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background-color: #fcf9f8;
+  z-index: 30;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Corner outer subtle corner bite notches matching Quantum Zone concert ticket */
+.ticket-corner-tl {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background-color: #fcf9f8;
+  z-index: 30;
+}
+.ticket-corner-bl {
+  position: absolute;
+  bottom: -8px;
+  left: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background-color: #fcf9f8;
+  z-index: 30;
+}
+.ticket-corner-tr {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background-color: #fcf9f8;
+  z-index: 30;
+}
+.ticket-corner-br {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background-color: #fcf9f8;
+  z-index: 30;
+}
+
+/* Realistic vertical ticket barcode generation */
+.barcode-lines-v {
+  background: repeating-linear-gradient(
+    0deg,
+    #ffffff 0px,
+    #ffffff 2px,
+    transparent 2px,
+    transparent 4px,
+    #ffffff 4px,
+    #ffffff 7px,
+    transparent 7px,
+    transparent 9px,
+    #ffffff 9px,
+    #ffffff 12px,
+    transparent 12px,
+    transparent 14px,
+    #ffffff 14px,
+    #ffffff 15px,
+    transparent 15px,
+    transparent 18px,
+    #ffffff 18px,
+    #ffffff 22px,
+    transparent 22px,
+    transparent 24px,
+    #ffffff 24px,
+    #ffffff 27px,
+    transparent 27px,
+    transparent 31px,
+    #ffffff 31px,
+    #ffffff 33px
+  );
+}
+
+.barcode-lines-v-light {
+  background: repeating-linear-gradient(
+    0deg,
+    #1c1b1b 0px,
+    #1c1b1b 2px,
+    transparent 2px,
+    transparent 4px,
+    #1c1b1b 4px,
+    #1c1b1b 7px,
+    transparent 7px,
+    transparent 9px,
+    #1c1b1b 9px,
+    #1c1b1b 12px,
+    transparent 12px,
+    transparent 14px,
+    #1c1b1b 14px,
+    #1c1b1b 15px,
+    transparent 15px,
+    transparent 18px,
+    #1c1b1b 18px,
+    #1c1b1b 22px,
+    transparent 22px,
+    transparent 24px,
+    #1c1b1b 24px,
+    #1c1b1b 27px,
+    transparent 27px,
+    transparent 31px,
+    #1c1b1b 31px,
+    #1c1b1b 33px
+  );
+}
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "outline": "#8a7263",
+        "tertiary-fixed-dim": "#4edea3",
+        "on-secondary-fixed": "#211a10",
+        "surface-dim": "#dcd9d9",
+        "inverse-on-surface": "#f3f0ef",
+        "surface-container-high": "#ebe7e7",
+        "surface-variant": "#e5e2e1",
+        "surface": "#fcf9f8",
+        "on-surface-variant": "#564335",
+        "inverse-surface": "#313030",
+        "surface-container": "#f0edec",
+        "error": "#ba1a1a",
+        "surface-container-low": "#f6f3f2",
+        "on-primary": "#ffffff",
+        "surface-tint": "#934b00",
+        "primary": "#934b00",
+        "tertiary": "#006c49",
+        "on-secondary": "#ffffff",
+        "primary-container": "#f07e00",
+        "on-tertiary-fixed-variant": "#005236",
+        "surface-bright": "#fcf9f8",
+        "tertiary-container": "#00b27b",
+        "on-tertiary-container": "#003c27",
+        "primary-fixed-dim": "#ffb782",
+        "inverse-primary": "#ffb782",
+        "primary-fixed": "#ffdcc5",
+        "on-tertiary-fixed": "#002113",
+        "on-tertiary": "#ffffff",
+        "background": "#fcf9f8",
+        "on-surface": "#1c1b1b",
+        "on-secondary-fixed-variant": "#4e4539",
+        "secondary-fixed-dim": "#d2c4b4",
+        "on-error-container": "#93000a",
+        "on-primary-container": "#542800",
+        "surface-container-highest": "#e5e2e1",
+        "secondary": "#675d4f",
+        "tertiary-fixed": "#6ffbbe",
+        "secondary-fixed": "#efe0cf",
+        "on-error": "#ffffff",
+        "surface-container-lowest": "#ffffff",
+        "on-primary-fixed-variant": "#703800",
+        "on-primary-fixed": "#301400",
+        "on-secondary-container": "#6b6153",
+        "secondary-container": "#ecdecc",
+        "error-container": "#ffdad6",
+        "on-background": "#1c1b1b",
+        "outline-variant": "#ddc1af"
+      },
+      borderRadius: {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      spacing: {
+        "space-sm": "0.5rem",
+        "margin": "1rem",
+        "space-md": "1rem",
+        "space-xl": "2rem",
+        "gutter-desktop": "1.5rem",
+        "margin-tablet": "2rem",
+        "space-lg": "1.5rem",
+        "gutter": "1rem",
+        "space-xs": "0.25rem",
+        "margin-desktop": "3rem"
+      },
+      fontFamily: {
+        "sans": ["Plus Jakarta Sans", "sans-serif"],
+        "body-md": ["Plus Jakarta Sans"],
+        "headline-sm": ["Plus Jakarta Sans"],
+        "price-display": ["Plus Jakarta Sans"],
+        "label-md": ["Plus Jakarta Sans"],
+        "body-lg": ["Plus Jakarta Sans"],
+        "body-sm": ["Plus Jakarta Sans"],
+        "label-sm": ["Plus Jakarta Sans"],
+        "display-lg": ["Plus Jakarta Sans"],
+        "label-lg": ["Plus Jakarta Sans"],
+        "headline-lg": ["Plus Jakarta Sans"],
+        "display-lg-mobile": ["Plus Jakarta Sans"],
+        "headline-md": ["Plus Jakarta Sans"],
+        "mono": ["Space Mono", "monospace"]
+      }
+    }
+  }
+};
+</script>
+<style>
+body {
+  min-height: max(884px, 100dvh);
+}
+</style>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface flex flex-col min-h-screen antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- Top Fixed App Header -->
+<header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe">
+<div class="h-16 px-margin flex items-center justify-between gap-space-sm max-w-md mx-auto">
+<div class="flex items-center gap-space-sm">
+<img alt="Fodium Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UzJUdPSssijjK4bOGEzl-_o-KFhfVUMV18IialSYZPzzR8-NmKsd6pTb9izLNDEYeYj0DYM7t4wiYp4Rnb6zzNI86Dnu0y2fBjAyfoZbPJVQxsN140b4WDKdHLfvJMq6kitftnSxacFmlJLzNZiBXEuWaVfIQi1-Om5Y7yCGuyKv7ichiOpwDev2AUBoPMsYyrFgJ3UnmlwSGjs-rOjPzDpd_YokY1lBah1NwRF-5_Wku6svH8jy1ra0wx">
+<div class="flex flex-col">
+<span class="font-label-lg text-label-lg text-on-surface tracking-tight leading-none">Fodium</span>
+<span class="font-label-sm text-label-sm text-secondary flex items-center gap-space-xs mt-0.5 leading-none">
+<span class="material-symbols-outlined text-[13px] text-primary-container">location_on</span>
+          Dakar · Sénégal
+        </span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<button aria-label="Rechercher" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+<button aria-label="Notifications" class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors relative">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-primary-container"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center ml-1 shadow-sm">
+<span class="material-symbols-outlined text-on-primary text-[17px]">person</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Body Content -->
+<main class="flex-1 flex flex-col relative w-full pt-16 pb-28 bg-surface">
+<div class="flex flex-col w-full max-w-md mx-auto pb-6">
+<!-- Top Section: Clean Header & Subtitle -->
+<section class="px-margin pt-4 flex flex-col gap-1">
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<span class="font-label-sm text-[11px] uppercase tracking-widest text-primary-container font-extrabold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary-container animate-pulse"></span>
+            Coffre-fort d'accès vérifié
+          </span>
+<h1 class="font-headline-lg text-[30px] font-extrabold text-on-surface tracking-tight mt-0.5">Mes Billets</h1>
+<p class="font-body-md text-body-md text-secondary mt-0.5">Tes pass d'accès officiels</p>
+</div>
+<div class="w-10 h-10 rounded-full bg-secondary-container/80 flex items-center justify-center text-primary shadow-sm mt-1">
+<span class="material-symbols-outlined text-[22px]">confirmation_number</span>
+</div>
+</div>
+</section>
+<!-- Clean Two-State Segmented Filter: Valides (2) vs Passés (1) -->
+<section class="px-margin mt-4">
+<div class="bg-surface-container p-1 rounded-full flex items-center">
+<button class="flex-1 py-2 px-3 rounded-full bg-surface-container-lowest text-primary-container font-label-md text-label-md font-bold shadow-sm flex items-center justify-center gap-1.5 transition-all" id="tab-active" onclick="switchFilter('active')">
+<span class="material-symbols-outlined text-[17px]">verified</span>
+<span>Valides (2)</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-full text-secondary font-label-md text-label-md font-medium flex items-center justify-center gap-1.5 transition-all" id="tab-expired" onclick="switchFilter('expired')">
+<span class="material-symbols-outlined text-[17px]">history</span>
+<span>Passés (1)</span>
+</button>
+</div>
+</section>
+<!-- VERTICAL LIST OF HORIZONTAL TICKETS (Active Tickets) -->
+<section class="mt-5 px-margin flex flex-col gap-4" id="active-tickets-container">
+<div class="flex items-center justify-between px-0.5">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-bold">Billets récents</span>
+<span class="font-label-sm text-[11px] text-tertiary font-bold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+          2 Billets Prêts à scanner
+        </span>
+</div>
+<!-- TICKET 1: HORIZONTAL TICKET - Pool Brunch All White -->
+<article class="ticket-h-card w-full h-[162px] bg-surface-container-lowest text-on-surface flex cursor-pointer group border border-outline-variant/40" onclick="openTicketDetails('FOD-89247')">
+  <div class="ticket-corner-tl"></div>
+  <div class="ticket-corner-bl"></div>
+  <div class="ticket-corner-tr"></div>
+  <div class="ticket-corner-br"></div>
+  <div class="w-[92px] shrink-0 bg-surface-container-lowest flex flex-col items-center justify-between py-3 px-2 relative border-r border-dashed border-outline-variant/40 select-none z-10">
+    <div class="flex flex-col items-center text-center">
+      <span class="text-[8px] font-mono tracking-widest uppercase text-secondary leading-none">BILLET</span>
+      <span class="text-[9px] font-mono font-bold tracking-wider text-primary-container leading-tight mt-0.5">FODIUM</span>
+    </div>
+    <div class="w-7 h-[72px] barcode-lines-v-light rounded-sm opacity-90 my-1"></div>
+    <div class="flex flex-col items-center text-center">
+      <span class="text-[8px] font-mono tracking-wider font-bold text-on-surface">#89247</span>
+      <span class="text-[7px] font-mono text-secondary uppercase tracking-tight mt-0.5">ZONE VIP</span>
+    </div>
+    <div class="ticket-notch-top -right-[11px]"></div>
+    <div class="ticket-notch-bottom -right-[11px]"></div>
+  </div>
+  <div class="flex-1 relative overflow-hidden flex flex-col justify-between p-3.5 z-10 bg-surface-container-lowest">
+    <img alt="Pool Brunch All White" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAPAUs1sUWoTj4bijyO6ldjm5ItH5jDVOBOkkO4L-Q1xDoeBsgEGAucnCp0BE7QCkOPd1KQ5_r_dtw9Qr_nmHRHg6SI3ODmmO-3zWXYR3hVuaUWUffUspg0xFmS21JBB4jrD5Y-sl5USxp1ZTCkkIcRG_-aMpamAN8-OwmimYPqdNt-44tvGjoiYd7QbZqp2xdsJBmN_3yG5YV7MIa_Q9j_rn64fxhr4UfyhbJKgh4o_RBX6-FfQsGSiQ">
+    <div class="relative z-20 flex items-center justify-between">
+      <div class="flex items-center gap-1.5">
+        <span class="px-2 py-0.5 rounded-full bg-primary-container text-white text-[9px] font-extrabold uppercase tracking-wider shadow-sm flex items-center gap-1">
+          <span class="material-symbols-outlined text-[11px]">directions_bus</span>
+          VIP + NAVETTE
+        </span>
+        <span class="text-[9px] text-secondary font-mono tracking-tight hidden sm:inline">SIÈGE 12</span>
+      </div>
+      <div class="flex items-center gap-1 bg-surface-container border border-outline-variant/40 px-2 py-0.5 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+        <span class="text-[9px] font-bold text-tertiary uppercase tracking-wider">Actif</span>
+      </div>
+    </div>
+    <div class="relative z-20 mt-1">
+      <span class="text-[9px] font-bold text-primary uppercase tracking-wider block leading-none">Saly Sunset Experience</span>
+      <h2 class="font-headline-sm text-[17px] font-extrabold text-on-surface tracking-tight leading-snug uppercase">
+        POOL BRUNCH – ALL WHITE
+      </h2>
+      <p class="text-[11px] text-secondary flex items-center gap-1 mt-0.5 font-medium">
+        <span class="material-symbols-outlined text-[13px] text-primary-container">location_on</span>
+        La Villa Resort, Saly
+      </p>
+    </div>
+    <div class="relative z-20 flex items-end justify-between pt-1 border-t border-outline-variant/40">
+      <div class="flex items-center gap-2">
+        <div class="flex flex-col">
+          <span class="text-[8px] font-mono uppercase text-secondary leading-none">DATE &amp; HEURE</span>
+          <span class="text-[11px] font-bold text-on-surface mt-0.5">Sam. 10 Oct. · 11:00 GMT</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="flex flex-col items-end">
+          <span class="text-[8px] font-mono text-secondary leading-none uppercase">WAVE PAY</span>
+          <span class="text-[13px] font-extrabold text-primary leading-tight">30 600 F</span>
+        </div>
+        <div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+<!-- TICKET 2: HORIZONTAL TICKET - Senegal Fashion Week -->
+<article class="ticket-h-card w-full h-[162px] bg-surface-container-lowest text-on-surface flex cursor-pointer group border border-outline-variant/40" onclick="openTicketDetails('DKR-44102')">
+  <div class="ticket-corner-tl"></div>
+  <div class="ticket-corner-bl"></div>
+  <div class="ticket-corner-tr"></div>
+  <div class="ticket-corner-br"></div>
+  <div class="w-[92px] shrink-0 bg-surface-container-lowest flex flex-col items-center justify-between py-3 px-2 relative border-r border-dashed border-outline-variant/40 select-none z-10">
+    <div class="flex flex-col items-center text-center">
+      <span class="text-[8px] font-mono tracking-widest uppercase text-secondary leading-none">OFFICIEL</span>
+      <span class="text-[9px] font-mono font-bold tracking-wider text-tertiary leading-tight mt-0.5">FODIUM</span>
+    </div>
+    <div class="w-7 h-[72px] barcode-lines-v-light rounded-sm opacity-90 my-1"></div>
+    <div class="flex flex-col items-center text-center">
+      <span class="text-[8px] font-mono tracking-wider font-bold text-on-surface">#44102</span>
+      <span class="text-[7px] font-mono text-secondary uppercase tracking-tight mt-0.5">RANGÉE A</span>
+    </div>
+    <div class="ticket-notch-top -right-[11px]"></div>
+    <div class="ticket-notch-bottom -right-[11px]"></div>
+  </div>
+  <div class="flex-1 relative overflow-hidden flex flex-col justify-between p-3.5 z-10 bg-surface-container-lowest">
+    <img alt="Senegal Fashion Week" class="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdaYJ8OCqxHuErTDOjzOi4Sx_SlzFbseDYH5-ehSr227iVtlXp8z8IPTId8YFCNQzPR5wgfFVh2Qi01sT_AfvtdpuZV-98sRW-IsTpaCgEX88XyttENaroy3UythJLwAwB7SGOIh7PcsM9QMbnT7FpmiMmBiaVHEybeMEMlKxDycT9VYpfqG_pqvXcC_BLoshZkRRZaIubR43hMZJG0-tZQhzcZtIG6_gft_9qjufDMdU8ZA7tg8dzzA">
+    <div class="relative z-20 flex items-center justify-between">
+      <div class="flex items-center gap-1.5">
+        <span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-[9px] font-extrabold uppercase tracking-wider border border-outline-variant/40 flex items-center gap-1">
+          <span class="material-symbols-outlined text-[11px] text-tertiary">star</span>
+          FRONT ROW · ENTRÉE SEULE
+        </span>
+      </div>
+      <div class="flex items-center gap-1 bg-surface-container border border-outline-variant/40 px-2 py-0.5 rounded-full">
+        <span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+        <span class="text-[9px] font-bold text-tertiary uppercase tracking-wider">Actif</span>
+      </div>
+    </div>
+    <div class="relative z-20 mt-1">
+      <span class="text-[9px] font-bold text-tertiary uppercase tracking-wider block leading-none">Édition Prestige Dakar</span>
+      <h2 class="font-headline-sm text-[17px] font-extrabold text-on-surface tracking-tight leading-snug uppercase">
+        SENEGAL FASHION WEEK
+      </h2>
+      <p class="text-[11px] text-secondary flex items-center gap-1 mt-0.5 font-medium">
+        <span class="material-symbols-outlined text-[13px] text-primary-container">location_on</span>
+        Grand Théâtre National, Dakar
+      </p>
+    </div>
+    <div class="relative z-20 flex items-end justify-between pt-1 border-t border-outline-variant/40">
+      <div class="flex items-center gap-2">
+        <div class="flex flex-col">
+          <span class="text-[8px] font-mono uppercase text-secondary leading-none">DATE &amp; HEURE</span>
+          <span class="text-[11px] font-bold text-on-surface mt-0.5">Ven. 27 Nov. · 19:30 GMT</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="flex flex-col items-end">
+          <span class="text-[8px] font-mono text-secondary leading-none uppercase">ORANGE MONEY</span>
+          <span class="text-[13px] font-extrabold text-on-surface leading-tight">35 000 F</span>
+        </div>
+        <div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-primary group-hover:bg-primary-container group-hover:text-white transition-colors">
+          <span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+</section>
+<!-- EXPIRED TICKETS LIST (Shown either below or toggled via Filter) -->
+<section class="mt-6 px-margin flex flex-col gap-3" id="expired-tickets-container">
+<div class="flex items-center justify-between px-0.5">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-bold">Historique des sorties</span>
+<span class="font-label-sm text-[11px] text-secondary">1 événement passé</span>
+</div>
+<!-- TICKET 3: HORIZONTAL TICKET - Dakar Jazz Festival (Archived/Expired) -->
+<article class="ticket-h-card w-full h-[150px] bg-[#f0edec] text-on-surface flex opacity-85 select-none">
+<!-- Corner Bites -->
+<div class="ticket-corner-tl"></div>
+<div class="ticket-corner-bl"></div>
+<div class="ticket-corner-tr"></div>
+<div class="ticket-corner-br"></div>
+<!-- LEFT STUB: ARCHIVED STUB -->
+<div class="w-[88px] shrink-0 bg-[#e5e2e1] flex flex-col items-center justify-between py-3 px-2 relative border-r border-dashed border-outline/30 z-10">
+<!-- Top Stub Brand / Label -->
+<div class="flex flex-col items-center text-center">
+<span class="text-[8px] font-mono tracking-widest uppercase text-secondary leading-none">ARCHIVE</span>
+<span class="text-[9px] font-mono font-bold tracking-wider text-secondary leading-tight mt-0.5">FODIUM</span>
+</div>
+<!-- Vertical Barcode Grayscale -->
+<div class="w-6 h-[64px] barcode-lines-v-light rounded-sm opacity-50 my-1"></div>
+<!-- Stub Bottom Ref -->
+<div class="flex flex-col items-center text-center">
+<span class="text-[8px] font-mono font-bold text-secondary">#10928</span>
+<span class="text-[7px] font-mono text-secondary/70 uppercase">UTILISÉ</span>
+</div>
+<!-- Notches -->
+<div class="ticket-notch-top -right-[11px]"></div>
+<div class="ticket-notch-bottom -right-[11px]"></div>
+</div>
+<!-- RIGHT: MAIN ARCHIVE BODY -->
+<div class="flex-1 relative overflow-hidden flex flex-col justify-between p-3 z-10 bg-surface-container-low">
+<!-- Subtle Grayscale Background -->
+<img alt="Dakar Jazz Festival" class="absolute inset-0 w-full h-full object-cover object-center grayscale opacity-15" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARKMQttghd26AtCsp5NeuImR1DQILj04zW5ytqZc1NnZiiecjvLtKCQwxO04esncgfzQlWBT5y1KVNgGvtUATG1E5-kwFj95_L7oHVAkOezUUnMjz4wAXmpFU839mRqbg9t0CsDkLfk8pqS5GInKfE44LEzd8DRNdsWdn8viDtxebKYj49kf085EuPIeS15kyvw0BSL_OLX4iMrNKU27C2V04aRkKIrvZ6PUwEmxoEs4uWf4ioJKwQkg">
+<!-- Top Row -->
+<div class="relative z-20 flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-secondary text-[9px] font-bold uppercase tracking-wider">
+              CONCERT LIVE
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-secondary text-[9px] font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary/60"></span>
+              Expiré
+            </span>
+</div>
+<!-- Middle Row -->
+<div class="relative z-20">
+<h2 class="font-headline-sm text-[16px] font-bold text-on-surface tracking-tight uppercase leading-snug">
+              DAKAR JAZZ FESTIVAL
+            </h2>
+<p class="text-[11px] text-secondary flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-[13px]">location_on</span>
+              Institut Français de Dakar
+            </p>
+</div>
+<!-- Bottom Row -->
+<div class="relative z-20 flex items-end justify-between pt-1 border-t border-outline-variant/40">
+<div class="flex flex-col">
+<span class="text-[8px] font-mono text-secondary uppercase leading-none">DATE DE L'ÉVÉNEMENT</span>
+<span class="text-[11px] font-semibold text-on-surface mt-0.5">18 Mai 2026 · Terminé</span>
+</div>
+<button class="px-2.5 py-1 rounded-lg bg-surface-container text-secondary text-[11px] font-bold flex items-center gap-1 hover:text-on-surface">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+<span>Reçu</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Help / Ticket Recovery Card (Discrete and elegant at bottom) -->
+<section class="px-margin mt-7">
+<div class="p-4 rounded-3xl bg-secondary-container/40 border border-secondary-container flex items-center justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-container text-on-primary flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">contact_support</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-label-lg text-label-lg text-on-surface font-bold">Tu ne trouves pas ton billet ?</h2>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5 leading-snug">
+              Vérifie l'adresse e-mail ou le numéro Wave / Orange Money utilisé lors du paiement.
+            </p>
+</div>
+</div>
+<button aria-label="Aide et assistance Fodium" class="w-8 h-8 rounded-full bg-surface-container-lowest text-on-surface flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</section>
+</div>
+</main>
+<!-- Interactive Script for Tab Switching and Ticket Click Modal/Details -->
+<script>
+  function switchFilter(type) {
+    const activeBtn = document.getElementById('tab-active');
+    const expiredBtn = document.getElementById('tab-expired');
+    const activeContainer = document.getElementById('active-tickets-container');
+    const expiredContainer = document.getElementById('expired-tickets-container');
+
+    if (type === 'active') {
+      activeBtn.className = 'flex-1 py-2 px-3 rounded-full bg-surface-container-lowest text-primary-container font-label-md text-label-md font-bold shadow-sm flex items-center justify-center gap-1.5 transition-all';
+      expiredBtn.className = 'flex-1 py-2 px-3 rounded-full text-secondary font-label-md text-label-md font-medium flex items-center justify-center gap-1.5 transition-all';
+      if (activeContainer) activeContainer.style.display = 'flex';
+      if (expiredContainer) expiredContainer.style.display = 'flex';
+    } else {
+      expiredBtn.className = 'flex-1 py-2 px-3 rounded-full bg-surface-container-lowest text-primary-container font-label-md text-label-md font-bold shadow-sm flex items-center justify-center gap-1.5 transition-all';
+      activeBtn.className = 'flex-1 py-2 px-3 rounded-full text-secondary font-label-md text-label-md font-medium flex items-center justify-center gap-1.5 transition-all';
+      if (activeContainer) activeContainer.style.display = 'none';
+      if (expiredContainer) {
+        expiredContainer.style.display = 'flex';
+        expiredContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  }
+
+  function openTicketDetails(ticketId) {
+    // Navigate or trigger detail view modal corresponding to SCREEN_6 Billet Officiel
+    console.log("Opening official ticket view for:", ticketId);
+  }
+</script>
+<!-- Bottom Fixed Navigation (Fodium Tab Bar with 'Billets' Active) -->
+<nav class="fixed bottom-0 inset-x-0 z-50 pb-safe pointer-events-none" data-active-classes="text-primary-container font-label-md">
+<div class="max-w-md mx-auto px-margin pb-space-sm">
+<div class="h-16 px-space-xs bg-surface-container-lowest/95 backdrop-blur-xl rounded-full shadow-[0_12px_32px_rgba(20,20,20,0.08)] flex items-center justify-around pointer-events-auto">
+<a class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-secondary transition-colors duration-150" data-path="accueil" href="#">
+<span class="material-symbols-outlined text-[22px]">home</span>
+<span class="font-label-sm text-label-sm tracking-tight mt-0.5">Accueil</span>
+</a>
+<a class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-secondary transition-colors duration-150" data-path="explorer" href="#">
+<span class="material-symbols-outlined text-[22px]">explore</span>
+<span class="font-label-sm text-label-sm tracking-tight mt-0.5">Explorer</span>
+</a>
+<a class="relative flex flex-col items-center justify-center w-14 h-14 rounded-full text-secondary transition-colors duration-150" data-path="trajets" href="#">
+<span class="absolute -top-1 px-1.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed text-[9px] font-bold tracking-wider uppercase leading-none">Bientôt</span>
+<span class="material-symbols-outlined text-[22px]">directions_bus</span>
+<span class="font-label-sm text-label-sm tracking-tight mt-0.5">Trajets</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center w-14 h-14 rounded-full transition-colors duration-150 relative text-primary-container font-label-md" data-path="mes-billets" href="#">
+<span class="material-symbols-outlined text-[22px]">confirmation_number</span>
+<span class="font-label-sm text-label-sm tracking-tight mt-0.5">Billets</span>
+</a>
+<a class="flex flex-col items-center justify-center w-14 h-14 rounded-full text-secondary transition-colors duration-150" data-path="profil" href="#">
+<span class="material-symbols-outlined text-[22px]">person</span>
+<span class="font-label-sm text-label-sm tracking-tight mt-0.5">Profil</span>
+</a>
+</div>
+</div>
+</nav>
+
+
+</body></html>

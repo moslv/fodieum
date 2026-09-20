@@ -1,0 +1,73 @@
+<!-- PASS COMBINE (billet seul / billet+navette + chips point de ramassage) - source 02-detail-evenement.html -->
+<!-- Coeur du brief (15% de la note). Logique JS associee : ../logique/pass-combine.js -->
+<div class="fixed bottom-0 left-0 right-0 z-40 bg-surface-container-lowest/95 backdrop-blur-xl rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.08)] px-4 pt-3 pb-6 max-w-lg mx-auto flex flex-col gap-3.5">
+<div class="w-10 h-1 rounded-full bg-surface-variant self-center"></div>
+<div class="grid grid-cols-2 gap-2.5">
+<button class="flex flex-col p-2.5 rounded-2xl bg-surface-container-low text-left transition-all active:scale-98" id="btnSolo" type="button">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Billet seul</span>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-0.5">25 500 XOF</span>
+</button>
+<button class="flex flex-col p-2.5 rounded-2xl bg-primary-fixed/50 text-left relative transition-all active:scale-98 shadow-sm" id="btnShuttle" type="button">
+<span class="absolute -top-2 right-2 px-2 py-0.5 rounded-full bg-primary-container text-white font-label-sm text-[10px] uppercase tracking-wider">
+          Recommandé
+        </span>
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-primary font-bold">Billet + Navette</span>
+<span class="material-symbols-outlined text-primary text-[16px]">check_circle</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface mt-0.5">30 600 XOF</span>
+</button>
+</div>
+<div class="flex flex-col gap-2 p-2.5 rounded-xl bg-surface-container-low" id="shuttleSection" style="display: flex;">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Lieu de ramassage :</span>
+<span class="font-body-sm text-[11px] text-tertiary flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[13px]">schedule</span> 08:30 → 22:00
+        </span>
+</div>
+<div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5" id="pickupChips">
+<button class="pickup-chip px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-colors" type="button">
+          Plateau
+        </button>
+<button class="pickup-chip px-2.5 py-1 rounded-full bg-primary-container text-on-primary font-label-sm text-label-sm whitespace-nowrap transition-colors" type="button">
+          Liberté 6
+        </button>
+<button class="pickup-chip px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-colors" type="button">
+          Keur Massar
+        </button>
+<button class="pickup-chip px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-label-sm text-label-sm whitespace-nowrap transition-colors" type="button">
+          Rufisque
+        </button>
+</div>
+</div>
+<div class="flex items-center justify-between px-1">
+<div class="flex flex-col">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Nombre de places</span>
+<span class="font-body-sm text-[11px] text-outline">Max. 4 par personne</span>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low px-2 py-1 rounded-full">
+<button class="w-7 h-7 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface active:scale-95 transition-transform font-bold" id="minusQty" type="button">
+          −
+        </button>
+<div class="relative px-2.5 py-0.5 bg-on-surface text-surface rounded font-headline-sm text-headline-sm tracking-wider flex items-center justify-center min-w-[28px]">
+<span id="qtyDisplay" class="">1</span>
+</div>
+<button class="w-7 h-7 rounded-full bg-surface-container-lowest flex items-center justify-center text-on-surface active:scale-95 transition-transform font-bold" id="plusQty" type="button">
+          +
+        </button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex flex-col">
+<div class="flex items-baseline gap-1">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Total :</span>
+<span class="font-price-display text-price-display text-primary-container font-extrabold" id="totalPriceDisplay">30 600 XOF</span>
+</div>
+<span class="font-body-sm text-[11px] text-outline">Frais de service inclus</span>
+</div>
+<button class="px-6 py-3 rounded-full bg-primary-container text-white font-label-lg text-label-lg shadow-lg shadow-primary-container/25 flex items-center gap-2 active:scale-95 transition-transform" id="checkoutBtn" type="button">
+<span class="">Paiement</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
