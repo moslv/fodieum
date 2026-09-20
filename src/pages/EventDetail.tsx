@@ -174,7 +174,12 @@ function EventDetailView({ event }: EventDetailViewProps) {
           <PassSelector
             event={event}
             pass={pass}
-            onCheckout={() => navigate(`/evenements/${event.slug}/paiement`)}
+            onCheckout={() =>
+              navigate(`/evenements/${event.slug}/paiement`, {
+                state: pass.selection,
+                viewTransition: true,
+              })
+            }
           />
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 
 import { AppShell } from '@/components/layout/AppShell'
+import { Checkout } from '@/pages/Checkout'
 import { EventDetail } from '@/pages/EventDetail'
 import { Events } from '@/pages/Events'
 import { Home } from '@/pages/Home'
@@ -21,6 +22,7 @@ export const router = createBrowserRouter([
       { path: '/', element: <Home /> },
       { path: '/evenements', element: <Events /> },
       { path: '/evenements/:slug', element: <EventDetail /> },
+      { path: '/evenements/:slug/paiement', element: <Checkout /> },
       { path: '/transport', element: <TransportTeaser /> },
       { path: '/mes-billets', element: <MyTickets /> },
       { path: '/profil', element: <Profile /> },
