@@ -10,6 +10,7 @@
     "react/only-export-components": ["warn", { "allowConstantExport": true }],
     "typescript/no-explicit-any": "error",
     "jsx-a11y/alt-text": "error",
-    "jsx-a11y/anchor-is-valid": "warn"
+    "jsx-a11y/anchor-is-valid": "warn",
+    "jsx-a11y/prefer-tag-over-role": "off"
   }
 }

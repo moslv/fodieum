@@ -66,6 +66,27 @@ export default {
         card: '22px',
         'card-lg': '26px',
       },
+      keyframes: {
+        // Le badge « bientôt » est la seule animation imposée par le brief :
+        // un reflet qui balaie la pastille, doublé d'un halo qui respire.
+        shimmer: {
+          '0%': { transform: 'translateX(-140%) skewX(-20deg)' },
+          '55%, 100%': { transform: 'translateX(260%) skewX(-20deg)' },
+        },
+        halo: {
+          '0%, 100%': { boxShadow: '0 0 0 0 rgb(240 126 0 / 0.45)' },
+          '50%': { boxShadow: '0 0 0 5px rgb(240 126 0 / 0)' },
+        },
+        'float-in': {
+          from: { opacity: '0', transform: 'translateY(14px)' },
+          to: { opacity: '1', transform: 'none' },
+        },
+      },
+      animation: {
+        shimmer: 'shimmer 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+        halo: 'halo 2.6s ease-out infinite',
+        'float-in': 'float-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both',
+      },
       boxShadow: {
         // Les trois ombres du glassmorphism des maquettes, nommées pour
         // éviter de recopier des valeurs arbitraires dans chaque composant.
