@@ -18,6 +18,14 @@ export const navItems: NavItem[] = [
 ]
 
 /**
+ * Les écrans porteurs d'une feuille d'action ancrée en bas masquent la barre
+ * d'onglets, qui viendrait sinon se superposer à elle.
+ */
+export function hidesBottomNav(pathname: string): boolean {
+  return /^\/evenements\/[^/]+/.test(pathname)
+}
+
+/**
  * Index de l'onglet actif : sert à positionner l'indicateur coulissant.
  * Les sous-routes (`/evenements/:slug`) restent rattachées à leur onglet.
  */
