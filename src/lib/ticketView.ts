@@ -29,8 +29,19 @@ export function resolveTickets(tickets: IssuedTicket[], now = new Date()): Resol
     .filter((resolved): resolved is ResolvedTicket => resolved !== null)
 }
 
-/** Les achats de la session priment sur l'historique de démonstration. */
-export function mergeTickets(issued: IssuedTicket[], demo: IssuedTicket[]): IssuedTicket[] {
+/**
+ * Les achats de la session priment sur l'historique de démonstration, et les
+ * billets rendus disparaissent des deux.
+ */
+export function mergeTickets(
+  issued: IssuedTicket[],
+  demo: IssuedTicket[],
+  cancelled: string[],
+): IssuedTicket[] {
   const seen = new Set(issued.map((ticket) => ticket.reference))
-  return [...issued, ...demo.filter((ticket) => !seen.has(ticket.reference))]
+  const dropped = new Set(cancelled)
+
+  return [...issued, ...demo.filter((ticket) => !seen.has(ticket.reference))].filter(
+    (ticket) => !dropped.has(ticket.reference),
+  )
 }

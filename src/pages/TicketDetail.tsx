@@ -2,21 +2,25 @@ import { ArrowLeft, Check, Share2, Ticket as TicketIcon } from 'lucide-react'
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
+import { CancelTicketButton } from '@/components/features/CancelTicketButton'
 import { TicketStub } from '@/components/features/TicketStub'
 import { PageContainer } from '@/components/layout/PageContainer'
 import { Button } from '@/components/ui/Button'
 import { account } from '@/data/account'
 import { demoTickets } from '@/data/tickets'
-import { useIssuedTickets } from '@/hooks/useIssuedTickets'
+import { useCancelledTickets, useIssuedTickets } from '@/hooks/useIssuedTickets'
 import { mergeTickets, resolveTicket } from '@/lib/ticketView'
 
 export function TicketDetail() {
   const { reference } = useParams()
   const navigate = useNavigate()
   const issued = useIssuedTickets()
+  const cancelled = useCancelledTickets()
   const [shared, setShared] = useState(false)
 
-  const stored = mergeTickets(issued, demoTickets).find((item) => item.reference === reference)
+  const stored = mergeTickets(issued, demoTickets, cancelled).find(
+    (item) => item.reference === reference,
+  )
   const resolved = stored ? resolveTicket(stored) : null
 
   if (!resolved) {
@@ -58,7 +62,7 @@ export function TicketDetail() {
           type="button"
           aria-label="Retour à mes billets"
           onClick={() => navigate('/mes-billets')}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-black/5 bg-white/80 text-on-surface shadow-glass transition-transform active:scale-95"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.06] bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
         >
           <ArrowLeft aria-hidden className="h-5 w-5" />
         </button>
@@ -95,6 +99,14 @@ export function TicketDetail() {
         <Button variant="ghost" size="lg" onClick={() => navigate(`/evenements/${event.slug}`)}>
           Voir l'événement
         </Button>
+        {/* Un billet déjà utilisé n'est plus annulable : il n'y a plus d'accès
+            à rendre. */}
+        {isPast ? null : (
+          <CancelTicketButton
+            reference={ticket.reference}
+            onCancelled={() => navigate('/mes-billets')}
+          />
+        )}
       </div>
 
       <p className="text-center text-body-sm text-outline">
