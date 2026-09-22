@@ -1,9 +1,15 @@
+import dakarJazzLarge from '@/assets/posters/poster-dakar-jazz-1280.webp'
+import dakarJazzSmall from '@/assets/posters/poster-dakar-jazz-640.webp'
 import fashionWeekLarge from '@/assets/posters/poster-fashion-week-dakar-1280.webp'
 import fashionWeekSmall from '@/assets/posters/poster-fashion-week-dakar-640.webp'
 import jazzLarge from '@/assets/posters/poster-jazz-night-1280.webp'
 import jazzSmall from '@/assets/posters/poster-jazz-night-640.webp'
 import poolBrunchLarge from '@/assets/posters/poster-pool-party-saly-1280.webp'
 import poolBrunchSmall from '@/assets/posters/poster-pool-party-saly-640.webp'
+import popenguineLarge from '@/assets/posters/poster-popenguine-1280.webp'
+import popenguineSmall from '@/assets/posters/poster-popenguine-640.webp'
+import saintLouisLarge from '@/assets/posters/poster-saint-louis-jazz-1280.webp'
+import saintLouisSmall from '@/assets/posters/poster-saint-louis-jazz-640.webp'
 
 import type { FodiumEvent } from './types'
 
@@ -103,7 +109,11 @@ export const events: FodiumEvent[] = [
       "Deux scènes face à l'océan, entre falaises et sable. Programmation acoustique l'après-midi, sets électroniques au coucher du soleil, et retour en navette jusqu'à Dakar dans la nuit.",
     tags: ['Plage', 'Acoustique', 'Sunset'],
     basePrice: 10200,
-    poster: null,
+    poster: {
+      small: popenguineSmall,
+      large: popenguineLarge,
+      alt: "Foule dansant sur la plage face à l'océan au coucher du soleil",
+    },
     organizer: { name: 'Popenguine Collective', verified: false, eventCount: 3 },
     shuttle: {
       operator: 'Fodium Express',
@@ -130,7 +140,11 @@ export const events: FodiumEvent[] = [
       "Le plus ancien festival de jazz d'Afrique de l'Ouest ouvre une soirée hors saison sur les quais. Aller-retour depuis Dakar assuré dans la nuit — 260 km, sans avoir à conduire.",
     tags: ['Jazz', 'Interurbain', 'Nuit blanche'],
     basePrice: 18000,
-    poster: null,
+    poster: {
+      small: saintLouisSmall,
+      large: saintLouisLarge,
+      alt: 'Saxophoniste en concert, éclairé sur une scène sombre',
+    },
     organizer: { name: 'Saint-Louis Jazz Association', verified: true, eventCount: 42 },
     shuttle: {
       operator: 'Fodium Express',
@@ -157,7 +171,11 @@ export const events: FodiumEvent[] = [
       "L'édition 2026 du Dakar Jazz Festival s'est tenue sur trois soirées à l'Institut français.",
     tags: ['Jazz', 'Archive'],
     basePrice: 12000,
-    poster: null,
+    poster: {
+      small: dakarJazzSmall,
+      large: dakarJazzLarge,
+      alt: "Section de cuivres d'un orchestre de jazz devant un rideau rouge",
+    },
     organizer: { name: 'Institut français de Dakar', verified: true, eventCount: 31 },
     shuttle: null,
     featured: false,
