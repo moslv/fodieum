@@ -48,14 +48,21 @@ export default {
         tear: 'var(--tear)',
       },
       fontFamily: {
-        // Une seule famille : les 12 alias générés par Stitch pointaient
-        // tous vers Plus Jakarta Sans.
+        // Les 12 alias générés par Stitch pointaient tous vers Plus Jakarta
+        // Sans : elle reste la famille de toute l'interface.
         sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif'],
         mono: ['Space Mono', 'ui-monospace', 'monospace'],
+        // Réservée au cri d'accueil, et à rien d'autre : une display aussi
+        // marquée s'use vite si on la met partout.
+        display: ['Unbounded', 'Plus Jakarta Sans', 'system-ui', 'sans-serif'],
       },
       fontSize: {
         // Chaque échelon porte sa graisse et son interlettrage : une seule
         // classe (`text-headline-md`) suffit à poser un niveau typographique.
+        // Unbounded est large de nature : l'interlettrage ne se resserre pas
+        // comme sur Plus Jakarta Sans, et la taille descend d'un cran.
+        hero: ['28px', { lineHeight: '34px', letterSpacing: '-0.01em', fontWeight: '800' }],
+        'hero-lg': ['42px', { lineHeight: '50px', letterSpacing: '-0.02em', fontWeight: '800' }],
         'display-lg': ['40px', { lineHeight: '48px', letterSpacing: '-0.03em', fontWeight: '800' }],
         'display-md': ['32px', { lineHeight: '38px', letterSpacing: '-0.025em', fontWeight: '800' }],
         'headline-lg': ['28px', { lineHeight: '34px', letterSpacing: '-0.02em', fontWeight: '700' }],

@@ -28,7 +28,7 @@ export function Home() {
                 <span aria-hidden className="h-2 w-2 animate-pulse rounded-full bg-primary" />
                 Dakar &amp; Régions
               </span>
-              <h1 className="text-display-md text-on-surface lg:text-display-lg">
+              <h1 className="font-display text-hero text-on-surface lg:text-hero-lg">
                 FOUGN DIEUM TAY
               </h1>
               <p className="text-body-lg text-secondary">Qu'est-ce qu'on fait ce week-end ?</p>
