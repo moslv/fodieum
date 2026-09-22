@@ -1,20 +1,8 @@
 /**
- * Génération déterministe des attributs d'un billet. Sans backend, le même
- * panier doit toujours produire la même référence et le même code-barres :
- * un tirage aléatoire changerait à chaque rendu de React.
+ * Attributs d'un billet, dérivés de sa graine : le même panier produit
+ * toujours la même référence et le même code-barres.
  */
-
-/** FNV-1a 32 bits : court, stable, suffisant pour une démo. */
-function hash(seed: string): number {
-  let value = 0x811c9dc5
-
-  for (let index = 0; index < seed.length; index += 1) {
-    value ^= seed.charCodeAt(index)
-    value = Math.imul(value, 0x01000193)
-  }
-
-  return value >>> 0
-}
+import { hash, hashSequence } from '@/lib/hash'
 
 /** `« FOD-89247 »`. */
 export function ticketReference(seed: string): string {
@@ -32,10 +20,5 @@ export function shuttleSeat(seed: string): number {
  * pas le même code.
  */
 export function barcodePattern(seed: string, bars = 44): number[] {
-  let value = hash(seed)
-
-  return Array.from({ length: bars }, () => {
-    value = Math.imul(value ^ (value >>> 15), 0x2545f491) >>> 0
-    return (value % 4) + 1
-  })
+  return hashSequence(seed, bars, 4).map((value) => value + 1)
 }
