@@ -4,7 +4,8 @@ Challenge frontend Kanzey.co. Reconception de l'accueil et du parcours d'achat d
 Fodium autour de sa nouvelle offre **Fodium Transport** : un seul pass pour le
 billet et le trajet.
 
-**Démo** : _(lien de déploiement à ajouter)_
+**Démo** : <https://fodieum.vercel.app>
+**Code** : <https://github.com/moslv/fodieum>
 
 ---
 
