@@ -1,4 +1,5 @@
 import { Bell, MapPin, User } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 
 import { Logo } from '@/components/layout/Logo'
 
@@ -24,13 +25,13 @@ export function MobileHeader() {
           >
             <Bell aria-hidden className="h-5 w-5" />
           </button>
-          <button
-            type="button"
+          <NavLink
+            to="/profil"
             aria-label="Mon profil"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-[#d86b00] text-white ring-2 ring-white/80"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-primary to-[#d86b00] text-white ring-2 ring-white/80 transition-transform active:scale-95"
           >
             <User aria-hidden className="h-5 w-5" />
-          </button>
+          </NavLink>
         </div>
       </div>
     </header>
