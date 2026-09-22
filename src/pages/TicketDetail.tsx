@@ -1,5 +1,5 @@
 import { ArrowLeft, Check, Share2, Ticket as TicketIcon } from 'lucide-react'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { CancelTicketButton } from '@/components/features/CancelTicketButton'
@@ -9,6 +9,8 @@ import { Button } from '@/components/ui/Button'
 import { account } from '@/data/account'
 import { demoTickets } from '@/data/tickets'
 import { useCancelledTickets, useIssuedTickets } from '@/hooks/useIssuedTickets'
+import { useTicketTear } from '@/hooks/useTicketTear'
+import { cancelTicket } from '@/lib/ticketStore'
 import { mergeTickets, resolveTicket } from '@/lib/ticketView'
 
 export function TicketDetail() {
@@ -17,6 +19,8 @@ export function TicketDetail() {
   const issued = useIssuedTickets()
   const cancelled = useCancelledTickets()
   const [shared, setShared] = useState(false)
+  const ticketRef = useRef<HTMLElement>(null)
+  const tear = useTicketTear(ticketRef)
 
   const stored = mergeTickets(issued, demoTickets, cancelled).find(
     (item) => item.reference === reference,
@@ -39,6 +43,14 @@ export function TicketDetail() {
   }
 
   const { ticket, event, pickupPoint, isPast } = resolved
+
+  // Le billet quitte le coffre une fois la déchirure jouée, pas avant : il
+  // disparaîtrait de l'écran au milieu de son animation.
+  async function cancel() {
+    await tear()
+    cancelTicket(ticket.reference)
+    navigate('/mes-billets')
+  }
 
   async function share() {
     const url = window.location.href
@@ -80,6 +92,7 @@ export function TicketDetail() {
         reference={ticket.reference}
         holder={account.fullName}
         quantity={ticket.quantity}
+        rootRef={ticketRef}
       />
 
       <div className="flex flex-col gap-2.5">
@@ -102,10 +115,7 @@ export function TicketDetail() {
         {/* Un billet déjà utilisé n'est plus annulable : il n'y a plus d'accès
             à rendre. */}
         {isPast ? null : (
-          <CancelTicketButton
-            reference={ticket.reference}
-            onCancelled={() => navigate('/mes-billets')}
-          />
+          <CancelTicketButton reference={ticket.reference} onConfirm={cancel} />
         )}
       </div>
 

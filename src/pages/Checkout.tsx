@@ -13,13 +13,14 @@ import { findEventBySlug } from '@/data/events'
 import { paymentMethods } from '@/data/paymentMethods'
 import { type PaymentPhase, usePaymentFlow } from '@/hooks/usePaymentFlow'
 import { useTicketPrinting } from '@/hooks/useTicketPrinting'
+import { useTicketTear } from '@/hooks/useTicketTear'
 import { readCheckoutSelection } from '@/lib/checkout'
 import { cn } from '@/lib/cn'
 import { formatPrice } from '@/lib/format'
 import { computePrice } from '@/lib/pricing'
 import { ticketReference } from '@/lib/ticket'
 import { downloadTicketImage } from '@/lib/ticketImage'
-import { issueTicket } from '@/lib/ticketStore'
+import { cancelTicket, issueTicket } from '@/lib/ticketStore'
 
 /** Durée d'appui : assez long pour être délibéré, assez court pour ne pas lasser. */
 const HOLD_DURATION = 1500
@@ -87,9 +88,16 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
 
   const flow = usePaymentFlow({ holdDuration: HOLD_DURATION, onIssue: issue })
   useTicketPrinting(ticketRef, flow.printProgress)
+  const tear = useTicketTear(ticketRef)
 
   const method = paymentMethods.find((item) => item.id === methodId) ?? paymentMethods[0]!
   const isPaid = flow.phase !== 'form'
+
+  async function cancel() {
+    await tear()
+    cancelTicket(reference)
+    navigate(`/evenements/${event.slug}`)
+  }
 
   async function saveTicket() {
     setDownload('working')
@@ -256,10 +264,7 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
                 <QrCode aria-hidden className="h-5 w-5" />
                 Voir mes billets
               </Button>
-              <CancelTicketButton
-                reference={reference}
-                onCancelled={() => navigate(`/evenements/${event.slug}`)}
-              />
+              <CancelTicketButton reference={reference} onConfirm={cancel} />
               {download === 'error' ? (
                 <p role="alert" className="flex items-center gap-1.5 text-body-sm text-error">
                   <AlertCircle aria-hidden className="h-4 w-4 shrink-0" />

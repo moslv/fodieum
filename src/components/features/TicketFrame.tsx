@@ -26,13 +26,25 @@ interface TicketFrameProps {
  *
  * Le contour — angles adoucis, entailles latérales — vient de `.ticket-cut`
  * et `.ticket-shell` (voir `styles/index.css`).
+ *
+ * Les deux moitiés et le tampon portent un `data-tear` : c'est par là que
+ * `useTicketTear` attrape le billet pour le déchirer à l'annulation. Le
+ * tampon est toujours dans le document, simplement invisible — le monter au
+ * moment de l'animation obligerait à attendre un rendu de React avant de
+ * pouvoir l'animer.
  */
 export function TicketFrame({ event, serial, children, rootRef, className }: TicketFrameProps) {
   return (
     <div className={cn('ticket-shell', className)}>
-      <article className="ticket-cut flex rounded-ticket bg-surface-container-lowest" ref={rootRef}>
+      <article
+        className="ticket-cut relative flex rounded-ticket bg-surface-container-lowest"
+        ref={rootRef}
+      >
         {/* ---- Talon illustré ---- */}
-        <div className="relative w-[86px] shrink-0 overflow-hidden rounded-l-ticket bg-surface-container sm:w-[104px]">
+        <div
+          data-tear="stub"
+          className="relative w-[86px] shrink-0 overflow-hidden rounded-l-ticket bg-surface-container sm:w-[104px]"
+        >
           <EventPoster event={event} size="thumb" />
           {/* Un voile plein écraserait l'affiche générée : seul le bas est
               assombri, là où se pose le numéro de souche. */}
@@ -49,9 +61,22 @@ export function TicketFrame({ event, serial, children, rootRef, className }: Tic
         </div>
 
         {/* ---- Corps imprimé, au-delà de la ligne de déchirure ---- */}
-        <div className="flex min-w-0 flex-1 flex-col border-l-2 border-dashed border-tear">
+        <div
+          data-tear="body"
+          className="flex min-w-0 flex-1 flex-col border-l-2 border-dashed border-tear"
+        >
           {children}
         </div>
+
+        <span
+          aria-hidden
+          data-tear="stamp"
+          className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center opacity-0"
+        >
+          <span className="rotate-[-12deg] rounded-md border-[3px] border-error px-4 py-1 font-mono text-headline-sm uppercase tracking-[0.22em] text-error">
+            Annulé
+          </span>
+        </span>
       </article>
     </div>
   )
