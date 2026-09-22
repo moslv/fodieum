@@ -63,7 +63,7 @@ export function HoldToPay({ amount, hold }: HoldToPayProps) {
           {isDone ? (
             <>
               <BadgeCheck aria-hidden className="h-5 w-5" />
-              Billet émis
+              Paiement envoyé
             </>
           ) : (
             <>
@@ -86,7 +86,7 @@ export function HoldToPay({ amount, hold }: HoldToPayProps) {
       <p id="hold-to-pay-hint" className="flex items-center gap-1.5 text-body-sm text-secondary">
         <Lock aria-hidden className="h-3.5 w-3.5 text-tertiary" />
         {isDone
-          ? 'Paiement confirmé · Billet disponible hors ligne'
+          ? "Transmission à l'opérateur…"
           : 'Relâchez avant la fin pour annuler — rien ne sera débité'}
       </p>
     </div>

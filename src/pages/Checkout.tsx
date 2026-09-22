@@ -1,25 +1,30 @@
-import { ArrowLeft, Check, ChevronDown, QrCode } from 'lucide-react'
+import { AlertCircle, ArrowLeft, Check, ChevronDown, Download, Loader2, QrCode } from 'lucide-react'
 import { useCallback, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 
+import { CancelTicketButton } from '@/components/features/CancelTicketButton'
 import { HoldToPay } from '@/components/features/HoldToPay'
+import { PaymentHandoff } from '@/components/features/PaymentHandoff'
 import { TicketStub } from '@/components/features/TicketStub'
 import { PageContainer } from '@/components/layout/PageContainer'
 import { Button } from '@/components/ui/Button'
 import { account } from '@/data/account'
 import { findEventBySlug } from '@/data/events'
 import { paymentMethods } from '@/data/paymentMethods'
-import { useHoldProgress } from '@/hooks/useHoldProgress'
+import { type PaymentPhase, usePaymentFlow } from '@/hooks/usePaymentFlow'
 import { useTicketPrinting } from '@/hooks/useTicketPrinting'
 import { readCheckoutSelection } from '@/lib/checkout'
 import { cn } from '@/lib/cn'
 import { formatPrice } from '@/lib/format'
 import { computePrice } from '@/lib/pricing'
 import { ticketReference } from '@/lib/ticket'
+import { downloadTicketImage } from '@/lib/ticketImage'
 import { issueTicket } from '@/lib/ticketStore'
 
 /** Durée d'appui : assez long pour être délibéré, assez court pour ne pas lasser. */
 const HOLD_DURATION = 1500
+
+type DownloadState = 'idle' | 'working' | 'done' | 'error'
 
 export function Checkout() {
   const { slug } = useParams()
@@ -54,6 +59,7 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
 
   const [methodId, setMethodId] = useState(paymentMethods[0]!.id)
   const [pickerOpen, setPickerOpen] = useState(false)
+  const [download, setDownload] = useState<DownloadState>('idle')
 
   const selection = readCheckoutSelection(selectionState, event)
   const breakdown = computePrice(event, selection)
@@ -79,11 +85,28 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
     })
   }, [breakdown.total, event.slug, methodId, reference, selection])
 
-  const hold = useHoldProgress({ duration: HOLD_DURATION, onComplete: issue })
-  useTicketPrinting(ticketRef, hold.progress)
+  const flow = usePaymentFlow({ holdDuration: HOLD_DURATION, onIssue: issue })
+  useTicketPrinting(ticketRef, flow.printProgress)
 
   const method = paymentMethods.find((item) => item.id === methodId) ?? paymentMethods[0]!
-  const isPaid = hold.status === 'done'
+  const isPaid = flow.phase !== 'form'
+
+  async function saveTicket() {
+    setDownload('working')
+
+    try {
+      await downloadTicketImage({
+        event,
+        pickupPoint,
+        reference,
+        holder: account.fullName,
+        quantity: selection.quantity,
+      })
+      setDownload('done')
+    } catch {
+      setDownload('error')
+    }
+  }
 
   return (
     <PageContainer className="pb-16 pt-4 lg:pt-10">
@@ -92,13 +115,11 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
           type="button"
           aria-label="Retour à l'événement"
           onClick={() => navigate(-1)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-black/5 bg-white/80 text-on-surface shadow-glass transition-transform active:scale-95"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.06] bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
         >
           <ArrowLeft aria-hidden className="h-5 w-5" />
         </button>
-        <h1 className="text-headline-md text-on-surface">
-          {isPaid ? 'Votre billet' : 'Confirmer et payer'}
-        </h1>
+        <h1 className="text-headline-md text-on-surface">{headings[flow.phase]}</h1>
       </div>
 
       <div className="lg:grid lg:grid-cols-[1fr_420px] lg:items-start lg:gap-10">
@@ -110,11 +131,11 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
           quantity={selection.quantity}
           printing
           rootRef={ticketRef}
-          className="lg:sticky lg:top-[92px]"
+          className="lg:sticky lg:top-[92px] lg:max-w-[560px]"
         />
 
         <div className="mt-6 flex flex-col gap-4 lg:mt-0">
-          <section className="rounded-card border border-white/70 bg-white/85 p-4 shadow-glass backdrop-blur-md">
+          <section className="rounded-card border border-black/[0.06] bg-surface-container-lowest p-4 shadow-glass">
             <div className="flex items-center gap-3">
               <span
                 className={cn(
@@ -196,7 +217,7 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
             </div>
           </section>
 
-          <section className="rounded-card border border-white/70 bg-white/85 p-4 shadow-glass backdrop-blur-md">
+          <section className="rounded-card border border-black/[0.06] bg-surface-container-lowest p-4 shadow-glass">
             <dl className="flex flex-col gap-1.5 text-body-md">
               <div className="flex items-baseline justify-between">
                 <dt className="text-secondary">Billet × {selection.quantity}</dt>
@@ -220,21 +241,118 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
             <p className="mt-1 text-[11px] text-outline">Frais de service inclus</p>
           </section>
 
-          {isPaid ? (
-            <div className="flex flex-col gap-2.5">
-              <Button size="lg" onClick={() => navigate('/mes-billets')}>
+          {flow.phase === 'form' ? <HoldToPay amount={breakdown.total} hold={flow.hold} /> : null}
+
+          {flow.phase === 'handoff' || flow.phase === 'confirmed' || flow.phase === 'printing' ? (
+            <IssuingStatus phase={flow.phase} progress={flow.printProgress} />
+          ) : null}
+
+          {flow.phase === 'issued' ? (
+            <div className="flex animate-float-in flex-col gap-2.5">
+              <Button size="lg" onClick={saveTicket} disabled={download === 'working'}>
+                <DownloadLabel state={download} />
+              </Button>
+              <Button variant="ghost" size="lg" onClick={() => navigate('/mes-billets')}>
                 <QrCode aria-hidden className="h-5 w-5" />
                 Voir mes billets
               </Button>
-              <Button variant="ghost" size="lg" onClick={() => navigate('/')}>
-                Retour à l'accueil
-              </Button>
+              <CancelTicketButton
+                reference={reference}
+                onCancelled={() => navigate(`/evenements/${event.slug}`)}
+              />
+              {download === 'error' ? (
+                <p role="alert" className="flex items-center gap-1.5 text-body-sm text-error">
+                  <AlertCircle aria-hidden className="h-4 w-4 shrink-0" />
+                  Le fichier n'a pas pu être créé. Votre billet reste dans « Mes billets ».
+                </p>
+              ) : (
+                <p className="text-center text-body-sm text-outline">
+                  Le billet est déjà dans votre coffre, lisible hors ligne.
+                </p>
+              )}
             </div>
-          ) : (
-            <HoldToPay amount={breakdown.total} hold={hold} />
-          )}
+          ) : null}
         </div>
       </div>
+
+      {flow.phase === 'handoff' || flow.phase === 'confirmed' ? (
+        <PaymentHandoff
+          method={method}
+          amount={breakdown.total}
+          stage={flow.phase}
+          onCancel={flow.cancel}
+        />
+      ) : null}
     </PageContainer>
+  )
+}
+
+/** Le paiement n'est pas un instant mais quatre états : le titre les suit. */
+const headings: Record<PaymentPhase, string> = {
+  form: 'Confirmer et payer',
+  handoff: 'Paiement en cours',
+  confirmed: 'Paiement confirmé',
+  printing: 'Émission du billet',
+  issued: 'Votre billet',
+}
+
+interface IssuingStatusProps {
+  phase: Exclude<PaymentPhase, 'form' | 'issued'>
+  progress: number
+}
+
+/** Ce qu'il se passe pendant que le billet n'est pas encore à emporter. */
+function IssuingStatus({ phase, progress }: IssuingStatusProps) {
+  return (
+    <div className="flex flex-col gap-2.5 rounded-full bg-surface-container px-6 py-4">
+      <p className="flex items-center justify-center gap-2 text-label-lg text-on-surface">
+        <Loader2 aria-hidden className="h-5 w-5 animate-spin motion-reduce:animate-none" />
+        {phase === 'printing' ? 'Émission de votre billet…' : 'Retrait des fonds…'}
+      </p>
+      <span
+        role="progressbar"
+        aria-label="Progression de l'émission"
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-valuenow={Math.round(progress * 100)}
+        className="h-1 overflow-hidden rounded-full bg-outline-variant/40"
+      >
+        <span
+          style={{ transform: `scaleX(${progress})` }}
+          className="block h-full origin-left rounded-full bg-primary transition-transform duration-150"
+        />
+      </span>
+    </div>
+  )
+}
+
+interface DownloadLabelProps {
+  state: DownloadState
+}
+
+function DownloadLabel({ state }: DownloadLabelProps) {
+  if (state === 'working') {
+    return (
+      <>
+        <Loader2 aria-hidden className="h-5 w-5 animate-spin motion-reduce:animate-none" />
+        Génération du fichier…
+      </>
+    )
+  }
+
+  if (state === 'done') {
+    return (
+      <>
+        <Check aria-hidden className="h-5 w-5" />
+        Billet enregistré
+      </>
+    )
+  }
+
+  return (
+    <>
+      <Download aria-hidden className="h-5 w-5" />
+      {state === 'error' ? 'Réessayer le téléchargement' : 'Télécharger le billet'}
+    </>
   )
 }

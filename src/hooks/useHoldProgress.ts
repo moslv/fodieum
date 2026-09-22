@@ -17,6 +17,8 @@ export interface HoldProgress {
   status: HoldStatus
   start: () => void
   release: () => void
+  /** Ramène l'appui à zéro, y compris après qu'il a abouti. */
+  reset: () => void
 }
 
 /**
@@ -87,5 +89,12 @@ export function useHoldProgress({ duration, onComplete }: UseHoldProgressOptions
     applyStatus('releasing')
   }, [applyStatus])
 
-  return { progress, status, start, release }
+  const reset = useCallback(() => {
+    cancelAnimationFrame(frameRef.current)
+    progressRef.current = 0
+    setProgress(0)
+    applyStatus('idle')
+  }, [applyStatus])
+
+  return { progress, status, start, release, reset }
 }
