@@ -45,7 +45,7 @@ export function Events() {
           </p>
         </header>
 
-        <div className="flex items-center gap-2.5 rounded-card border border-white/70 bg-white/85 px-4 py-3 shadow-glass backdrop-blur-md focus-within:ring-2 focus-within:ring-primary/40">
+        <div className="flex items-center gap-2.5 rounded-card border border-black/[0.06] bg-surface-container-lowest px-4 py-3 shadow-glass focus-within:ring-2 focus-within:ring-primary/40">
           <Search aria-hidden className="h-5 w-5 shrink-0 text-secondary" />
           <input
             type="search"

@@ -144,12 +144,12 @@ function EventDetailView({ event }: EventDetailViewProps) {
               ))}
             </ul>
 
-            <section className="rounded-card border border-white/70 bg-white/80 p-5 shadow-glass backdrop-blur-md">
+            <section className="rounded-card border border-black/[0.06] bg-surface-container-lowest p-5 shadow-glass">
               <h2 className="text-headline-sm text-on-surface">À propos</h2>
               <p className="mt-2 text-body-lg text-on-surface-variant">{event.description}</p>
             </section>
 
-            <section className="flex items-center gap-3 rounded-card border border-white/70 bg-white/80 p-4 shadow-glass backdrop-blur-md">
+            <section className="flex items-center gap-3 rounded-card border border-black/[0.06] bg-surface-container-lowest p-4 shadow-glass">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <Sparkles aria-hidden className="h-5 w-5" />
               </span>

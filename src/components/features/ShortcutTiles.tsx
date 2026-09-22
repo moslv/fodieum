@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 import { SoonBadge } from '@/components/ui/SoonBadge'
 
 const tileClass =
-  'group relative flex min-h-[136px] flex-col justify-between rounded-card border border-white/70 bg-white/80 p-4 shadow-glass backdrop-blur-md transition-all hover:-translate-y-0.5 hover:border-primary/30 active:scale-[0.98] lg:min-h-[168px] lg:p-6'
+  'group relative flex min-h-[136px] flex-col justify-between rounded-card border border-black/[0.06] bg-surface-container-lowest p-4 shadow-glass transition-all hover:-translate-y-0.5 hover:border-primary/30 active:scale-[0.98] lg:min-h-[168px] lg:p-6'
 
 const iconClass =
-  'flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/15 to-primary/5 text-primary shadow-sm lg:h-14 lg:w-14'
+  'flex h-11 w-11 items-center justify-center rounded-2xl bg-primary/10 text-primary lg:h-14 lg:w-14'
 
 const titleClass =
   'text-[17px] font-bold leading-tight text-on-surface transition-colors group-hover:text-primary lg:text-headline-md'

@@ -12,7 +12,7 @@ import { navItems } from '@/lib/navigation'
  */
 export function DesktopHeader() {
   return (
-    <header className="sticky top-0 z-50 hidden border-b border-white/60 bg-white/75 backdrop-blur-xl lg:block">
+    <header className="sticky top-0 z-50 hidden border-b border-black/[0.06] bg-background/80 backdrop-blur-xl lg:block">
       <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-8 px-8">
         <NavLink to="/" aria-label="Fodium — accueil" className="shrink-0 text-on-surface">
           <Logo />
@@ -49,21 +49,21 @@ export function DesktopHeader() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2.5">
-          <span className="flex items-center gap-1.5 rounded-full border border-black/5 bg-white/80 px-3 py-1.5 text-label-sm text-secondary">
+          <span className="flex items-center gap-1.5 rounded-full bg-surface-container px-3 py-1.5 text-label-sm text-secondary">
             <MapPin aria-hidden className="h-3.5 w-3.5 text-primary" />
             Sénégal
           </span>
           <button
             type="button"
             aria-label="Rechercher"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/80 bg-white/80 text-on-surface shadow-glass transition-transform active:scale-95"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.06] bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
           >
             <Search aria-hidden className="h-5 w-5" />
           </button>
           <button
             type="button"
             aria-label="Notifications"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/80 bg-white/80 text-on-surface shadow-glass transition-transform active:scale-95"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.06] bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
           >
             <Bell aria-hidden className="h-5 w-5" />
           </button>

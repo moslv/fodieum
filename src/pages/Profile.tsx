@@ -31,7 +31,7 @@ export function Profile() {
           </div>
         </div>
 
-        <ul className="mt-6 divide-y divide-black/5 overflow-hidden rounded-card border border-white/70 bg-white/80 shadow-glass backdrop-blur-md">
+        <ul className="mt-6 divide-y divide-black/5 overflow-hidden rounded-card border border-black/[0.06] bg-surface-container-lowest shadow-glass">
           {rows.map(({ icon: Icon, label, hint }) => (
             <li key={label}>
               <button

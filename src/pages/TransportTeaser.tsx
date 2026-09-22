@@ -52,7 +52,7 @@ export function TransportTeaser() {
         {promises.map(({ icon: Icon, title, body }) => (
           <li
             key={title}
-            className="rounded-card border border-white/70 bg-white/80 p-5 shadow-glass backdrop-blur-md"
+            className="rounded-card border border-black/[0.06] bg-surface-container-lowest p-5 shadow-glass"
           >
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
               <Icon aria-hidden className="h-5 w-5" />

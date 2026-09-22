@@ -38,7 +38,7 @@ export function SearchBar() {
       onSubmit={handleSubmit}
       role="search"
       className={cn(
-        'flex flex-col gap-2 rounded-card border border-white/70 bg-white/85 px-4 py-3 shadow-glass-lg backdrop-blur-md',
+        'flex flex-col gap-2 rounded-card border border-black/[0.06] bg-surface-container-lowest px-4 py-3 shadow-glass',
         'transition-all focus-within:ring-2 focus-within:ring-primary/40 sm:flex-row sm:items-center sm:gap-3',
       )}
     >
@@ -57,7 +57,7 @@ export function SearchBar() {
       <div
         role="tablist"
         aria-label="Type de recherche"
-        className="flex shrink-0 items-center gap-1 self-stretch rounded-full border border-black/5 bg-surface-container/70 p-1 sm:self-auto"
+        className="flex shrink-0 items-center gap-1 self-stretch rounded-full bg-surface-container p-1 sm:self-auto"
       >
         {scopes.map(({ id, label }) => (
           <button
@@ -69,7 +69,7 @@ export function SearchBar() {
             className={cn(
               'flex-1 whitespace-nowrap rounded-full px-3.5 py-1.5 text-label-sm transition-all sm:flex-none',
               scope === id
-                ? 'bg-white text-primary shadow-sm'
+                ? 'bg-surface-container-lowest text-primary shadow-sm'
                 : 'font-medium text-secondary hover:text-on-surface',
             )}
           >

@@ -32,7 +32,7 @@ export function PassSelector({ event, pass, onCheckout }: PassSelectorProps) {
       aria-label="Choix du pass"
       className={cn(
         'fixed inset-x-0 bottom-0 z-40 mx-auto flex max-w-lg flex-col gap-3.5 rounded-t-3xl',
-        'border-t border-white/70 bg-white/95 px-4 pb-6 pt-3 shadow-sheet backdrop-blur-xl',
+        'border-t border-black/[0.06] bg-surface-container-lowest/95 px-4 pb-6 pt-3 shadow-sheet backdrop-blur-xl',
         'lg:static lg:max-w-none lg:rounded-card lg:border lg:p-5 lg:shadow-glass-lg',
       )}
     >

@@ -19,7 +19,7 @@ export function BottomNav() {
         aria-label="Navigation principale"
         className={cn(
           'pointer-events-auto relative mx-auto flex h-[66px] max-w-md items-center px-2',
-          'rounded-full border border-white/75 bg-white/85 shadow-nav backdrop-blur-xl',
+          'rounded-full border border-black/[0.06] bg-surface-container-lowest/90 shadow-nav backdrop-blur-xl',
         )}
       >
         <span aria-hidden className="pointer-events-none absolute inset-y-[9px] left-2 right-2">

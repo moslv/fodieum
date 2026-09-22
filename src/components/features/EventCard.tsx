@@ -25,8 +25,8 @@ export function EventCard({ event, showDate = true, className }: EventCardProps)
       to={`/evenements/${event.slug}`}
       viewTransition
       className={cn(
-        'group flex flex-col overflow-hidden rounded-card-lg border border-white/70 bg-white/85 shadow-glass-lg backdrop-blur-md',
-        'transition-all hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.99]',
+        'group flex flex-col overflow-hidden rounded-card-lg border border-black/[0.06] bg-surface-container-lowest shadow-glass',
+        'transition-all hover:-translate-y-0.5 hover:shadow-glass-lg active:scale-[0.99]',
         className,
       )}
     >
