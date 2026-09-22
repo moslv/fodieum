@@ -61,10 +61,18 @@ export default {
         'label-lg': ['15px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '700' }],
         'label-md': ['13px', { lineHeight: '18px', letterSpacing: '0.02em', fontWeight: '600' }],
         'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.04em', fontWeight: '700' }],
+        // Échelons du billet : intitulés poinçonnés, valeurs en machine à écrire.
+        'stub-label': ['9px', { lineHeight: '12px', letterSpacing: '0.18em', fontWeight: '700' }],
+        'stub-value': ['14px', { lineHeight: '18px', letterSpacing: '0.01em', fontWeight: '700' }],
+        // Titre du billet : en capitales, l'interlettrage doit redevenir positif.
+        'ticket-title': ['21px', { lineHeight: '23px', letterSpacing: '0.005em', fontWeight: '800' }],
       },
       borderRadius: {
-        card: '22px',
-        'card-lg': '26px',
+        card: '18px',
+        'card-lg': '22px',
+        // Un billet n'est pas une carte : ses angles sont ceux de l'icône
+        // « Événements », à peine adoucis.
+        ticket: '8px',
       },
       keyframes: {
         // Le badge « bientôt » est la seule animation imposée par le brief :

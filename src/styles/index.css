@@ -3,6 +3,8 @@
 @import '@fontsource/plus-jakarta-sans/600.css';
 @import '@fontsource/plus-jakarta-sans/700.css';
 @import '@fontsource/plus-jakarta-sans/800.css';
+@import '@fontsource/space-mono/400.css';
+@import '@fontsource/space-mono/700.css';
 
 @tailwind base;
 @tailwind components;
@@ -33,6 +35,38 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer components {
+  /* --- Silhouette du billet -------------------------------------------------
+     Le billet reprend le contour exact de l'icône « Événements » : un
+     rectangle aux angles adoucis, entaillé d'un demi-disque à mi-hauteur sur
+     chaque flanc, refendu par une ligne de déchirure pointillée.
+
+     Les entailles sont deux masques radiaux intersectés. Aucune classe
+     Tailwind ne les exprime, et contrairement à des pastilles posées
+     par-dessus, un masque évide réellement le billet : la découpe tient sur
+     n'importe quel fond, clair comme sombre.
+
+     L'ombre est portée par l'enveloppe en `drop-shadow`, parce qu'elle suit
+     la silhouette détourée ; une `box-shadow` posée sur le billet lui-même
+     serait rognée par le masque en même temps que le reste. */
+  .ticket-shell {
+    filter: drop-shadow(0 1px 1px rgb(20 20 20 / 0.05))
+      drop-shadow(0 8px 18px rgb(20 20 20 / 0.09));
+  }
+
+  .ticket-cut {
+    --notch: 10px;
+    -webkit-mask-image:
+      radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000 100%),
+      radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      radial-gradient(circle var(--notch) at 0 50%, transparent 98%, #000 100%),
+      radial-gradient(circle var(--notch) at 100% 50%, transparent 98%, #000 100%);
+    mask-composite: intersect;
   }
 }
 
