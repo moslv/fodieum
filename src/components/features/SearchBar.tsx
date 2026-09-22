@@ -38,7 +38,7 @@ export function SearchBar() {
       onSubmit={handleSubmit}
       role="search"
       className={cn(
-        'flex flex-col gap-2 rounded-card border border-black/[0.06] bg-surface-container-lowest px-4 py-3 shadow-glass',
+        'flex flex-col gap-2 rounded-card border border-hairline bg-surface-container-lowest px-4 py-3 shadow-glass',
         'transition-all focus-within:ring-2 focus-within:ring-primary/40 sm:flex-row sm:items-center sm:gap-3',
       )}
     >

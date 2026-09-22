@@ -52,7 +52,7 @@ export function TransportTeaser() {
         {promises.map(({ icon: Icon, title, body }) => (
           <li
             key={title}
-            className="rounded-card border border-black/[0.06] bg-surface-container-lowest p-5 shadow-glass"
+            className="rounded-card border border-hairline bg-surface-container-lowest p-5 shadow-glass"
           >
             <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
               <Icon aria-hidden className="h-5 w-5" />
@@ -69,7 +69,7 @@ export function TransportTeaser() {
         </p>
         <Link
           to="/evenements"
-          className="mt-3 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-label-lg text-white shadow-lg shadow-primary/25 transition-transform active:scale-95"
+          className="mt-3 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-label-lg text-on-primary shadow-lg shadow-primary/25 transition-transform active:scale-95"
         >
           Voir les événements desservis
         </Link>

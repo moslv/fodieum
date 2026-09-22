@@ -15,7 +15,7 @@ export function SoonBadge({ className, size = 'sm' }: SoonBadgeProps) {
     <span
       className={cn(
         'relative inline-flex select-none items-center overflow-hidden rounded-full',
-        'bg-gradient-to-r from-primary to-[#d86b00] font-bold uppercase tracking-[0.12em] text-white',
+        'bg-gradient-to-r from-primary to-[#d86b00] font-bold uppercase tracking-[0.12em] text-on-primary',
         'animate-halo motion-reduce:animate-none',
         size === 'sm' ? 'px-1.5 py-0.5 text-[8px] leading-none' : 'px-2.5 py-1 text-[10px]',
         className,

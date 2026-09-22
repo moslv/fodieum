@@ -25,7 +25,7 @@ export function EventCard({ event, showDate = true, className }: EventCardProps)
       to={`/evenements/${event.slug}`}
       viewTransition
       className={cn(
-        'group flex flex-col overflow-hidden rounded-card-lg border border-black/[0.06] bg-surface-container-lowest shadow-glass',
+        'group flex flex-col overflow-hidden rounded-card-lg border border-hairline bg-surface-container-lowest shadow-glass',
         'transition-all hover:-translate-y-0.5 hover:shadow-glass-lg active:scale-[0.99]',
         className,
       )}
@@ -85,7 +85,7 @@ export function EventCard({ event, showDate = true, className }: EventCardProps)
           </span>
         </div>
 
-        <div className="mt-auto flex items-baseline justify-between border-t border-black/5 pt-2.5">
+        <div className="mt-auto flex items-baseline justify-between border-t border-hairline pt-2.5">
           <span className="text-body-sm text-secondary">À partir de</span>
           <span className="text-price text-primary">{formatPrice(event.basePrice)}</span>
         </div>

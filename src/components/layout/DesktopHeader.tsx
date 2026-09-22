@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 import { Logo } from '@/components/layout/Logo'
 import { SoonBadge } from '@/components/ui/SoonBadge'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { cn } from '@/lib/cn'
 import { navItems } from '@/lib/navigation'
 
@@ -12,7 +13,7 @@ import { navItems } from '@/lib/navigation'
  */
 export function DesktopHeader() {
   return (
-    <header className="sticky top-0 z-50 hidden border-b border-black/[0.06] bg-background/80 backdrop-blur-xl lg:block">
+    <header className="sticky top-0 z-50 hidden border-b border-hairline bg-background/80 backdrop-blur-xl lg:block">
       <div className="mx-auto flex h-[72px] max-w-7xl items-center gap-8 px-8">
         <NavLink to="/" aria-label="Fodium — accueil" className="shrink-0 text-on-surface">
           <Logo />
@@ -56,21 +57,22 @@ export function DesktopHeader() {
           <button
             type="button"
             aria-label="Rechercher"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.06] bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
           >
             <Search aria-hidden className="h-5 w-5" />
           </button>
+          <ThemeToggle />
           <button
             type="button"
             aria-label="Notifications"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.06] bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
           >
             <Bell aria-hidden className="h-5 w-5" />
           </button>
           <NavLink
             to="/profil"
             aria-label="Mon profil"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-[#d86b00] text-white ring-2 ring-white/80 transition-transform active:scale-95"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-primary to-[#d86b00] text-on-primary ring-2 ring-surface transition-transform active:scale-95"
           >
             <User aria-hidden className="h-5 w-5" />
           </NavLink>

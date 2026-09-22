@@ -57,7 +57,7 @@ export function PaymentHandoff({ method, amount, stage, onCancel }: PaymentHando
             ) : (
               <span
                 aria-hidden
-                className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-tertiary text-white shadow-glass"
+                className="absolute -right-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-tertiary text-on-tertiary shadow-glass"
               >
                 <Check className="h-3.5 w-3.5" />
               </span>
@@ -108,7 +108,7 @@ export function PaymentHandoff({ method, amount, stage, onCancel }: PaymentHando
           ))}
         </ol>
 
-        <p className="mt-5 flex items-center gap-2 border-t border-black/5 pt-4 text-body-sm text-secondary">
+        <p className="mt-5 flex items-center gap-2 border-t border-hairline pt-4 text-body-sm text-secondary">
           <ShieldCheck aria-hidden className="h-4 w-4 shrink-0 text-tertiary" />
           Votre place est retenue pendant l&apos;opération.
         </p>

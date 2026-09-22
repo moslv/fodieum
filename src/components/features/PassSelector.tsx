@@ -32,7 +32,7 @@ export function PassSelector({ event, pass, onCheckout }: PassSelectorProps) {
       aria-label="Choix du pass"
       className={cn(
         'fixed inset-x-0 bottom-0 z-40 mx-auto flex max-w-lg flex-col gap-3.5 rounded-t-3xl',
-        'border-t border-black/[0.06] bg-surface-container-lowest/95 px-4 pb-6 pt-3 shadow-sheet backdrop-blur-xl',
+        'border-t border-hairline bg-surface-container-lowest/95 px-4 pb-6 pt-3 shadow-sheet backdrop-blur-xl',
         'lg:static lg:max-w-none lg:rounded-card lg:border lg:p-5 lg:shadow-glass-lg',
       )}
     >
@@ -106,8 +106,8 @@ export function PassSelector({ event, pass, onCheckout }: PassSelectorProps) {
                       className={cn(
                         'whitespace-nowrap rounded-full px-2.5 py-1 text-label-sm transition-colors',
                         isSelected
-                          ? 'bg-primary text-white'
-                          : 'bg-surface-container-lowest text-on-surface hover:bg-white',
+                          ? 'bg-primary text-on-primary'
+                          : 'bg-surface-container-lowest text-on-surface hover:bg-surface-container-low',
                       )}
                     >
                       {point.name}
@@ -154,7 +154,7 @@ export function PassSelector({ event, pass, onCheckout }: PassSelectorProps) {
         </div>
       </div>
 
-      <dl className="flex flex-col gap-1 border-t border-black/5 pt-2.5 text-body-sm">
+      <dl className="flex flex-col gap-1 border-t border-hairline pt-2.5 text-body-sm">
         <div className="flex items-baseline justify-between">
           <dt className="text-secondary">
             Billet × {selection.quantity}
@@ -171,7 +171,7 @@ export function PassSelector({ event, pass, onCheckout }: PassSelectorProps) {
         ) : null}
       </dl>
 
-      <div className="flex items-center justify-between gap-3 border-t border-black/5 pt-3">
+      <div className="flex items-center justify-between gap-3 border-t border-hairline pt-3">
         <div className="flex min-w-0 flex-col">
           <div className="flex items-baseline gap-1">
             <span className="text-body-sm text-on-surface-variant">Total :</span>
@@ -212,7 +212,7 @@ function PassOption({ icon: Icon, label, price, selected, recommended, onSelect 
       )}
     >
       {recommended ? (
-        <span className="absolute -top-2 right-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+        <span className="absolute -top-2 right-2 rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-on-primary">
           Recommandé
         </span>
       ) : null}

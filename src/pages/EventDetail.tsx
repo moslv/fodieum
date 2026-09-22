@@ -34,7 +34,7 @@ export function EventDetail() {
         </p>
         <Link
           to="/evenements"
-          className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-label-lg text-white"
+          className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-label-lg text-on-primary"
         >
           Voir les événements
         </Link>
@@ -144,12 +144,12 @@ function EventDetailView({ event }: EventDetailViewProps) {
               ))}
             </ul>
 
-            <section className="rounded-card border border-black/[0.06] bg-surface-container-lowest p-5 shadow-glass">
+            <section className="rounded-card border border-hairline bg-surface-container-lowest p-5 shadow-glass">
               <h2 className="text-headline-sm text-on-surface">À propos</h2>
               <p className="mt-2 text-body-lg text-on-surface-variant">{event.description}</p>
             </section>
 
-            <section className="flex items-center gap-3 rounded-card border border-black/[0.06] bg-surface-container-lowest p-4 shadow-glass">
+            <section className="flex items-center gap-3 rounded-card border border-hairline bg-surface-container-lowest p-4 shadow-glass">
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
                 <Sparkles aria-hidden className="h-5 w-5" />
               </span>
@@ -203,7 +203,7 @@ function IconButton({ label, children, pressed, onClick }: IconButtonProps) {
       onClick={onClick}
       className={cn(
         'flex h-10 w-10 items-center justify-center rounded-full backdrop-blur-md transition-all active:scale-95',
-        pressed ? 'bg-primary text-white' : 'bg-black/35 text-white hover:bg-black/50',
+        pressed ? 'bg-primary text-on-primary' : 'bg-black/35 text-white hover:bg-black/50',
       )}
     >
       {children}

@@ -49,7 +49,7 @@ export function TicketFrame({ event, serial, children, rootRef, className }: Tic
         </div>
 
         {/* ---- Corps imprimé, au-delà de la ligne de déchirure ---- */}
-        <div className="flex min-w-0 flex-1 flex-col border-l-2 border-dashed border-black/15">
+        <div className="flex min-w-0 flex-1 flex-col border-l-2 border-dashed border-tear">
           {children}
         </div>
       </article>

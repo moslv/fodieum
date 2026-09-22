@@ -11,6 +11,23 @@
     />
     <meta name="theme-color" content="#F07E00" />
     <title>Fodium — Billetterie & Transport</title>
+
+    <!--
+      Le thème est posé avant le premier rendu : chargé par React, il ferait
+      apparaître la page en clair avant de virer au sombre. La clé est la même
+      que celle de `src/lib/theme.ts`.
+    -->
+    <script>
+      try {
+        var stored = localStorage.getItem('fodium.theme')
+        var dark =
+          stored === 'dark' ||
+          (stored !== 'light' && matchMedia('(prefers-color-scheme: dark)').matches)
+        document.documentElement.classList.toggle('dark', dark)
+      } catch (error) {
+        // Stockage bloqué : la page s'affiche en clair, ce qui reste correct.
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

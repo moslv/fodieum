@@ -12,7 +12,7 @@ export function NotFound() {
       </p>
       <Link
         to="/"
-        className="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-label-lg text-white shadow-lg shadow-primary/25 transition-transform active:scale-95"
+        className="mt-6 inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-label-lg text-on-primary shadow-lg shadow-primary/25 transition-transform active:scale-95"
       >
         Retour à l'accueil
       </Link>

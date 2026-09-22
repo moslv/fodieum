@@ -53,7 +53,7 @@ export function TicketListCard({ resolved }: TicketListCardProps) {
             </p>
           </div>
 
-          <div className="mt-auto flex items-end justify-between gap-3 border-t border-dashed border-black/15 pt-2.5">
+          <div className="mt-auto flex items-end justify-between gap-3 border-t border-dashed border-tear pt-2.5">
             <div className="min-w-0">
               <p className="font-mono text-stub-label uppercase text-outline">Séance</p>
               <p className="mt-0.5 truncate font-mono text-stub-value text-on-surface">

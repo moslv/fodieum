@@ -6,39 +6,46 @@ export default {
     extend: {
       colors: {
         // Palette Material 3 des maquettes, réduite aux tokens réellement
-        // utilisés. `primary` tranche la divergence relevée entre écrans
-        // (#F07E00 sur l'accueil, #934b00 ailleurs) : voir DIVERGENCES.md.
-        primary: '#F07E00',
-        'primary-dark': '#934b00',
-        'primary-container': '#f07e00',
-        'primary-fixed': '#ffdcc5',
-        'on-primary': '#ffffff',
-        'on-primary-container': '#542800',
+        // utilisés. Chaque teinte est une variable CSS définie deux fois dans
+        // `styles/index.css` : une bascule de `.dark` rhabille l'application
+        // entière, sans qu'un seul composant ait à porter une variante `dark:`.
+        primary: 'rgb(var(--primary) / <alpha-value>)',
+        'primary-dark': 'rgb(var(--primary-dark) / <alpha-value>)',
+        'primary-container': 'rgb(var(--primary-container) / <alpha-value>)',
+        'primary-fixed': 'rgb(var(--primary-fixed) / <alpha-value>)',
+        'on-primary': 'rgb(var(--on-primary) / <alpha-value>)',
+        'on-primary-container': 'rgb(var(--on-primary-container) / <alpha-value>)',
 
-        secondary: '#675d4f',
-        'secondary-container': '#ecdecc',
-        'on-secondary': '#ffffff',
+        secondary: 'rgb(var(--secondary) / <alpha-value>)',
+        'secondary-container': 'rgb(var(--secondary-container) / <alpha-value>)',
+        'on-secondary': 'rgb(var(--on-secondary) / <alpha-value>)',
 
-        tertiary: '#006c49',
-        'tertiary-container': '#00b27b',
-        'on-tertiary': '#ffffff',
+        tertiary: 'rgb(var(--tertiary) / <alpha-value>)',
+        'tertiary-container': 'rgb(var(--tertiary-container) / <alpha-value>)',
+        'on-tertiary': 'rgb(var(--on-tertiary) / <alpha-value>)',
 
-        background: '#fcf9f8',
-        surface: '#fcf9f8',
-        'surface-variant': '#e5e2e1',
-        'surface-container-lowest': '#ffffff',
-        'surface-container-low': '#f6f3f2',
-        'surface-container': '#f0edec',
-        'surface-container-high': '#ebe7e7',
-        'on-surface': '#1c1b1b',
-        'on-surface-variant': '#564335',
+        background: 'rgb(var(--background) / <alpha-value>)',
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        'surface-variant': 'rgb(var(--surface-variant) / <alpha-value>)',
+        'surface-container-lowest': 'rgb(var(--surface-container-lowest) / <alpha-value>)',
+        'surface-container-low': 'rgb(var(--surface-container-low) / <alpha-value>)',
+        'surface-container': 'rgb(var(--surface-container) / <alpha-value>)',
+        'surface-container-high': 'rgb(var(--surface-container-high) / <alpha-value>)',
+        'on-surface': 'rgb(var(--on-surface) / <alpha-value>)',
+        'on-surface-variant': 'rgb(var(--on-surface-variant) / <alpha-value>)',
 
-        outline: '#8a7263',
-        'outline-variant': '#ddc1af',
+        outline: 'rgb(var(--outline) / <alpha-value>)',
+        'outline-variant': 'rgb(var(--outline-variant) / <alpha-value>)',
 
-        error: '#ba1a1a',
-        'error-container': '#ffdad6',
-        'on-error': '#ffffff',
+        error: 'rgb(var(--error) / <alpha-value>)',
+        'error-container': 'rgb(var(--error-container) / <alpha-value>)',
+        'on-error': 'rgb(var(--on-error) / <alpha-value>)',
+
+        // Deux filets dont l'opacité doit changer avec le thème : un trait noir
+        // à 6 % disparaît sur fond sombre. Ils portent donc leur alpha dans la
+        // variable, et ne se modulent pas au point d'usage.
+        hairline: 'var(--hairline)',
+        tear: 'var(--tear)',
       },
       fontFamily: {
         // Une seule famille : les 12 alias générés par Stitch pointaient
@@ -98,10 +105,12 @@ export default {
       boxShadow: {
         // Les trois ombres du glassmorphism des maquettes, nommées pour
         // éviter de recopier des valeurs arbitraires dans chaque composant.
-        glass: '0 6px 24px 0 rgb(20 20 20 / 0.04)',
-        'glass-lg': '0 12px 32px 0 rgb(20 20 20 / 0.06)',
-        nav: '0 16px 36px -6px rgb(20 20 20 / 0.12), 0 6px 16px -3px rgb(20 20 20 / 0.05)',
-        sheet: '0 -8px 30px rgb(0 0 0 / 0.08)',
+        // Elles s'assombrissent avec le thème : une ombre à 4 % ne se voit pas
+        // sur un fond sombre.
+        glass: '0 6px 24px 0 var(--shadow-soft)',
+        'glass-lg': '0 12px 32px 0 var(--shadow-medium)',
+        nav: '0 16px 36px -6px var(--shadow-strong), 0 6px 16px -3px var(--shadow-soft)',
+        sheet: '0 -8px 30px var(--shadow-medium)',
       },
     },
   },

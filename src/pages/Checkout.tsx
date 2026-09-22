@@ -37,7 +37,7 @@ export function Checkout() {
         <h1 className="text-headline-lg text-on-surface">Commande introuvable</h1>
         <Link
           to="/evenements"
-          className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-label-lg text-white"
+          className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-label-lg text-on-primary"
         >
           Voir les événements
         </Link>
@@ -115,7 +115,7 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
           type="button"
           aria-label="Retour à l'événement"
           onClick={() => navigate(-1)}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.06] bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
         >
           <ArrowLeft aria-hidden className="h-5 w-5" />
         </button>
@@ -135,7 +135,7 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
         />
 
         <div className="mt-6 flex flex-col gap-4 lg:mt-0">
-          <section className="rounded-card border border-black/[0.06] bg-surface-container-lowest p-4 shadow-glass">
+          <section className="rounded-card border border-hairline bg-surface-container-lowest p-4 shadow-glass">
             <div className="flex items-center gap-3">
               <span
                 className={cn(
@@ -217,7 +217,7 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
             </div>
           </section>
 
-          <section className="rounded-card border border-black/[0.06] bg-surface-container-lowest p-4 shadow-glass">
+          <section className="rounded-card border border-hairline bg-surface-container-lowest p-4 shadow-glass">
             <dl className="flex flex-col gap-1.5 text-body-md">
               <div className="flex items-baseline justify-between">
                 <dt className="text-secondary">Billet × {selection.quantity}</dt>
@@ -233,7 +233,7 @@ function CheckoutView({ event, selectionState }: CheckoutViewProps) {
                   </dd>
                 </div>
               ) : null}
-              <div className="mt-1.5 flex items-baseline justify-between border-t border-black/5 pt-2.5">
+              <div className="mt-1.5 flex items-baseline justify-between border-t border-hairline pt-2.5">
                 <dt className="text-label-lg text-on-surface">Total à payer</dt>
                 <dd className="text-price text-primary">{formatPrice(breakdown.total)}</dd>
               </div>

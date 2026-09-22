@@ -47,8 +47,10 @@ export function HoldToPay({ amount, hold }: HoldToPayProps) {
         onKeyUp={handleKeyUp}
         className={cn(
           'relative w-full touch-none select-none overflow-hidden rounded-full px-6 py-4',
-          'text-label-lg text-white shadow-lg transition-transform duration-200',
-          isDone ? 'bg-tertiary shadow-tertiary/25' : 'bg-primary shadow-primary/30',
+          'text-label-lg shadow-lg transition-transform duration-200',
+          isDone
+            ? 'bg-tertiary text-on-tertiary shadow-tertiary/25'
+            : 'bg-primary text-on-primary shadow-primary/30',
           status === 'holding' ? 'scale-[0.98]' : 'scale-100',
         )}
       >
@@ -56,7 +58,7 @@ export function HoldToPay({ amount, hold }: HoldToPayProps) {
         <span
           aria-hidden
           style={{ transform: `scaleX(${progress})` }}
-          className="absolute inset-0 origin-left bg-white/25"
+          className="absolute inset-0 origin-left bg-white/25 dark:bg-black/25"
         />
 
         <span className="relative flex items-center justify-center gap-2">

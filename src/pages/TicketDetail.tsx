@@ -30,7 +30,7 @@ export function TicketDetail() {
         <h1 className="mt-3 text-headline-lg text-on-surface">Billet introuvable</h1>
         <Link
           to="/mes-billets"
-          className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-label-lg text-white"
+          className="mt-6 inline-flex rounded-full bg-primary px-6 py-3 text-label-lg text-on-primary"
         >
           Retour à mes billets
         </Link>
@@ -62,7 +62,7 @@ export function TicketDetail() {
           type="button"
           aria-label="Retour à mes billets"
           onClick={() => navigate('/mes-billets')}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-black/[0.06] bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-hairline bg-surface-container-lowest text-on-surface transition-transform active:scale-95"
         >
           <ArrowLeft aria-hidden className="h-5 w-5" />
         </button>

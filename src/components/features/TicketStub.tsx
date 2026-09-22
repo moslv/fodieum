@@ -87,7 +87,7 @@ export function TicketStub({
           </div>
         </div>
 
-        <dl className="grid grid-cols-3 gap-x-4 border-t border-dashed border-black/15 px-4 py-2.5">
+        <dl className="grid grid-cols-3 gap-x-4 border-t border-dashed border-tear px-4 py-2.5">
           <TicketField label="Date" value={formatTicketDate(event.startsAt)} />
           <TicketField label="Heure" value={`${formatEventTime(event.startsAt)} GMT`} />
           <TicketField label="Places" value={admits} />
@@ -96,7 +96,7 @@ export function TicketStub({
         {pickupPoint ? (
           <div
             data-print="shuttle"
-            className="flex flex-col gap-2 border-t border-dashed border-black/15 px-4 py-2.5"
+            className="flex flex-col gap-2 border-t border-dashed border-tear px-4 py-2.5"
           >
             <span className="flex items-center gap-2">
               <Bus aria-hidden className="h-3.5 w-3.5 shrink-0 text-primary" />
@@ -116,7 +116,7 @@ export function TicketStub({
           </div>
         ) : null}
 
-        <div className="mt-auto flex items-end gap-3 border-t border-dashed border-black/15 px-4 py-2.5">
+        <div className="mt-auto flex items-end gap-3 border-t border-dashed border-tear px-4 py-2.5">
           <span className="flex h-7 flex-1 items-end gap-[2px] overflow-hidden" aria-hidden>
             {bars.map((width, index) => (
               // Les barres n'ont pas d'identité propre : leur position est leur clé.

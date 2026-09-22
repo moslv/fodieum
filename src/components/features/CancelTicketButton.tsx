@@ -46,7 +46,7 @@ export function CancelTicketButton({ reference, onCancelled }: CancelTicketButto
       <div className="flex gap-2">
         <Button
           size="lg"
-          className="flex-1 bg-error shadow-error/20"
+          className="flex-1 bg-error text-on-error shadow-error/20"
           onClick={() => {
             cancelTicket(reference)
             onCancelled()

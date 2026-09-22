@@ -45,7 +45,7 @@ export function Events() {
           </p>
         </header>
 
-        <div className="flex items-center gap-2.5 rounded-card border border-black/[0.06] bg-surface-container-lowest px-4 py-3 shadow-glass focus-within:ring-2 focus-within:ring-primary/40">
+        <div className="flex items-center gap-2.5 rounded-card border border-hairline bg-surface-container-lowest px-4 py-3 shadow-glass focus-within:ring-2 focus-within:ring-primary/40">
           <Search aria-hidden className="h-5 w-5 shrink-0 text-secondary" />
           <input
             type="search"
@@ -125,7 +125,7 @@ function FilterChip({ selected, onSelect, children }: FilterChipProps) {
       className={cn(
         'inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-label-md transition-all active:scale-95',
         selected
-          ? 'bg-primary text-white shadow-sm shadow-primary/25'
+          ? 'bg-primary text-on-primary shadow-sm shadow-primary/25'
           : 'bg-surface-container text-on-surface-variant hover:bg-surface-container-high',
       )}
     >

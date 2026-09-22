@@ -40,6 +40,6 @@ export const paymentMethods: PaymentMethod[] = [
     name: 'Carte bancaire',
     hint: '3D Secure Visa & Mastercard',
     maskedPhone: '•••• 4921',
-    swatch: 'bg-on-surface text-white',
+    swatch: 'bg-on-surface text-surface',
   },
 ]
